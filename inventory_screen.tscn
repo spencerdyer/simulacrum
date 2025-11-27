@@ -1,0 +1,123 @@
+[gd_scene load_steps=2 format=3 uid="uid://f5k8d2y5r7x4"]
+
+[ext_resource type="Script" path="res://inventory_screen.gd" id="1_script"]
+
+[node name="InventoryScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -250.0
+offset_right = 350.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_right = 700.0
+offset_bottom = 40.0
+text = "INVENTORY & EQUIPMENT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 50.0
+offset_right = 680.0
+offset_bottom = 480.0
+theme_override_constants/separation = 20
+
+[node name="InventoryPanel" type="Panel" parent="Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Panel/HBoxContainer/InventoryPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 30.0
+grow_horizontal = 2
+text = "Backpack"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/HBoxContainer/InventoryPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 30.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/InventoryPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EquipmentPanel" type="Panel" parent="Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Panel/HBoxContainer/EquipmentPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 30.0
+grow_horizontal = 2
+text = "Equipment"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/EquipmentPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 40.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="HeadSlot" type="Button" parent="Panel/HBoxContainer/EquipmentPanel/VBoxContainer"]
+layout_mode = 2
+text = "HEAD: Empty"
+
+[node name="ChestSlot" type="Button" parent="Panel/HBoxContainer/EquipmentPanel/VBoxContainer"]
+layout_mode = 2
+text = "CHEST: Empty"
+
+[node name="LegsSlot" type="Button" parent="Panel/HBoxContainer/EquipmentPanel/VBoxContainer"]
+layout_mode = 2
+text = "LEGS: Empty"
+
+[node name="RightHandSlot" type="Button" parent="Panel/HBoxContainer/EquipmentPanel/VBoxContainer"]
+layout_mode = 2
+text = "RIGHT_HAND: Empty"
+
+[node name="LeftHandSlot" type="Button" parent="Panel/HBoxContainer/EquipmentPanel/VBoxContainer"]
+layout_mode = 2
+text = "LEFT_HAND: Empty"
+
+[connection signal="pressed" from="Panel/HBoxContainer/EquipmentPanel/VBoxContainer/HeadSlot" to="." method="_on_equipment_slot_pressed" binds= ["HEAD"]]
+[connection signal="pressed" from="Panel/HBoxContainer/EquipmentPanel/VBoxContainer/ChestSlot" to="." method="_on_equipment_slot_pressed" binds= ["CHEST"]]
+[connection signal="pressed" from="Panel/HBoxContainer/EquipmentPanel/VBoxContainer/LegsSlot" to="." method="_on_equipment_slot_pressed" binds= ["LEGS"]]
+[connection signal="pressed" from="Panel/HBoxContainer/EquipmentPanel/VBoxContainer/RightHandSlot" to="." method="_on_equipment_slot_pressed" binds= ["RIGHT_HAND"]]
+[connection signal="pressed" from="Panel/HBoxContainer/EquipmentPanel/VBoxContainer/LeftHandSlot" to="." method="_on_equipment_slot_pressed" binds= ["LEFT_HAND"]]
+

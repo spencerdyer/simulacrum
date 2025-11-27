@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4k8d2y5r7x3"]
+[gd_scene load_steps=6 format=3 uid="uid://b4k8d2y5r7x3"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://c8k8d2y5r7x9" path="res://player.tscn" id="2_player"]
 [ext_resource type="PackedScene" uid="uid://e4k8d2y5r7x2" path="res://hud.tscn" id="3_hud"]
 [ext_resource type="PackedScene" uid="uid://d3k8d2y5r7x1" path="res://character_screen.tscn" id="4_charscreen"]
+[ext_resource type="PackedScene" uid="uid://f5k8d2y5r7x4" path="res://inventory_screen.tscn" id="5_invscreen"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_script")
@@ -33,4 +34,8 @@ position = Vector2(576, 324)
 [node name="CharacterScreen" parent="CanvasLayer" instance=ExtResource("4_charscreen")]
 visible = false
 
+[node name="InventoryScreen" parent="CanvasLayer" instance=ExtResource("5_invscreen")]
+visible = false
+
 [connection signal="toggle_character_screen" from="CanvasLayer/HUD" to="." method="_on_hud_toggle_character_screen"]
+[connection signal="toggle_inventory_screen" from="CanvasLayer/HUD" to="." method="_on_hud_toggle_inventory_screen"]
