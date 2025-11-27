@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://e4k8d2y5r7x2"]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_script"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="CharButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -60.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "C"
+
+[connection signal="pressed" from="CharButton" to="." method="_on_char_button_pressed"]
