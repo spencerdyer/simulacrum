@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://b4k8d2y5r7x3"]
+
+[ext_resource type="Script" path="res://src/scenes/main.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://c8k8d2y5r7x9" path="res://src/entities/player/player.tscn" id="2_player"]
+[ext_resource type="PackedScene" uid="uid://npc_scene_12345" path="res://src/entities/npc/npc.tscn" id="2_npc"]
+[ext_resource type="PackedScene" uid="uid://e4k8d2y5r7x2" path="res://src/ui/hud.tscn" id="3_hud"]
+[ext_resource type="PackedScene" uid="uid://d3k8d2y5r7x1" path="res://src/ui/character_screen.tscn" id="4_charscreen"]
+[ext_resource type="PackedScene" uid="uid://f5k8d2y5r7x4" path="res://src/ui/inventory_screen.tscn" id="5_invscreen"]
+[ext_resource type="PackedScene" uid="uid://trade_screen_456" path="res://src/ui/trade_screen.tscn" id="6_tradescreen"]
+[ext_resource type="PackedScene" uid="uid://interaction_menu_123" path="res://src/ui/interaction_menu.tscn" id="7_interactmenu"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_left = -2000.0
+offset_top = -2000.0
+offset_right = 2000.0
+offset_bottom = 2000.0
+mouse_filter = 2
+color = Color(0.133333, 0.133333, 0.133333, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -100.0
+offset_top = -150.0
+offset_right = 100.0
+offset_bottom = -100.0
+text = "Click anywhere to move"
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(576, 324)
+
+[node name="MerchantNPC" parent="." instance=ExtResource("2_npc")]
+position = Vector2(700, 324)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("3_hud")]
+
+[node name="CharacterScreen" parent="CanvasLayer" instance=ExtResource("4_charscreen")]
+visible = false
+
+[node name="InventoryScreen" parent="CanvasLayer" instance=ExtResource("5_invscreen")]
+visible = false
+
+[node name="TradeScreen" parent="CanvasLayer" instance=ExtResource("6_tradescreen")]
+visible = false
+
+[node name="InteractionMenu" parent="CanvasLayer" instance=ExtResource("7_interactmenu")]
+visible = false
+
+[connection signal="toggle_character_screen" from="CanvasLayer/HUD" to="." method="_on_hud_toggle_character_screen"]
+[connection signal="toggle_inventory_screen" from="CanvasLayer/HUD" to="." method="_on_hud_toggle_inventory_screen"]

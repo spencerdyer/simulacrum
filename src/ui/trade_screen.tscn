@@ -1,0 +1,126 @@
+[gd_scene load_steps=2 format=3 uid="uid://trade_screen_456"]
+
+[ext_resource type="Script" path="res://src/ui/trade_screen.gd" id="1_script"]
+
+[node name="TradeScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -250.0
+offset_right = 400.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 50.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="PlayerSide" type="VBoxContainer" parent="Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Panel/HBoxContainer/PlayerSide"]
+layout_mode = 2
+text = "Your Inventory"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/HBoxContainer/PlayerSide"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/PlayerSide/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Middle" type="VBoxContainer" parent="Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="PlayerOfferLabel" type="Label" parent="Panel/HBoxContainer/Middle"]
+layout_mode = 2
+text = "Player Offer"
+horizontal_alignment = 1
+
+[node name="PlayerOfferScroll" type="ScrollContainer" parent="Panel/HBoxContainer/Middle"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerOfferList" type="VBoxContainer" parent="Panel/HBoxContainer/Middle/PlayerOfferScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TradeButton" type="Button" parent="Panel/HBoxContainer/Middle"]
+layout_mode = 2
+text = "<-- TRADE -->"
+
+[node name="NPCOfferScroll" type="ScrollContainer" parent="Panel/HBoxContainer/Middle"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NPCOfferList" type="VBoxContainer" parent="Panel/HBoxContainer/Middle/NPCOfferScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NPCOfferLabel" type="Label" parent="Panel/HBoxContainer/Middle"]
+layout_mode = 2
+text = "NPC Offer"
+horizontal_alignment = 1
+
+[node name="CloseButton" type="Button" parent="Panel/HBoxContainer/Middle"]
+layout_mode = 2
+text = "Cancel"
+
+[node name="NPCSide" type="VBoxContainer" parent="Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Panel/HBoxContainer/NPCSide"]
+layout_mode = 2
+text = "Merchant Inventory"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/HBoxContainer/NPCSide"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/NPCSide/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="XCloseButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -25.0
+offset_bottom = 25.0
+grow_horizontal = 0
+text = "X"
+
+[connection signal="pressed" from="Panel/HBoxContainer/Middle/TradeButton" to="." method="_on_trade_button_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Middle/CloseButton" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="Panel/XCloseButton" to="." method="_on_close_pressed"]

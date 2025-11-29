@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="Simulacrum"
-run/main_scene="res://main.tscn"
+run/main_scene="res://src/scenes/main.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://src/assets/sprites/icon.svg"
 
 [autoload]
 
-DatabaseManager="*res://database_manager.gd"
+DatabaseManager="*res://src/core/database_manager.gd"
 
 [rendering]
 

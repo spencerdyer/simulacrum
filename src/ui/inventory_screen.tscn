@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://f5k8d2y5r7x4"]
 
-[ext_resource type="Script" path="res://inventory_screen.gd" id="1_script"]
+[ext_resource type="Script" path="res://src/ui/inventory_screen.gd" id="1_script"]
 
 [node name="InventoryScreen" type="Control"]
 layout_mode = 3
@@ -115,9 +115,19 @@ text = "RIGHT_HAND: Empty"
 layout_mode = 2
 text = "LEFT_HAND: Empty"
 
-[connection signal="pressed" from="Panel/HBoxContainer/EquipmentPanel/VBoxContainer/HeadSlot" to="." method="_on_equipment_slot_pressed" binds= ["HEAD"]]
-[connection signal="pressed" from="Panel/HBoxContainer/EquipmentPanel/VBoxContainer/ChestSlot" to="." method="_on_equipment_slot_pressed" binds= ["CHEST"]]
-[connection signal="pressed" from="Panel/HBoxContainer/EquipmentPanel/VBoxContainer/LegsSlot" to="." method="_on_equipment_slot_pressed" binds= ["LEGS"]]
-[connection signal="pressed" from="Panel/HBoxContainer/EquipmentPanel/VBoxContainer/RightHandSlot" to="." method="_on_equipment_slot_pressed" binds= ["RIGHT_HAND"]]
-[connection signal="pressed" from="Panel/HBoxContainer/EquipmentPanel/VBoxContainer/LeftHandSlot" to="." method="_on_equipment_slot_pressed" binds= ["LEFT_HAND"]]
+[node name="XCloseButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -25.0
+offset_bottom = 25.0
+grow_horizontal = 0
+text = "X"
 
+[connection signal="pressed" from="Panel/HBoxContainer/EquipmentPanel/VBoxContainer/HeadSlot" to="." method="_on_slot_pressed" binds= ["HEAD"]]
+[connection signal="pressed" from="Panel/HBoxContainer/EquipmentPanel/VBoxContainer/ChestSlot" to="." method="_on_slot_pressed" binds= ["CHEST"]]
+[connection signal="pressed" from="Panel/HBoxContainer/EquipmentPanel/VBoxContainer/LegsSlot" to="." method="_on_slot_pressed" binds= ["LEGS"]]
+[connection signal="pressed" from="Panel/HBoxContainer/EquipmentPanel/VBoxContainer/RightHandSlot" to="." method="_on_slot_pressed" binds= ["RIGHT_HAND"]]
+[connection signal="pressed" from="Panel/HBoxContainer/EquipmentPanel/VBoxContainer/LeftHandSlot" to="." method="_on_slot_pressed" binds= ["LEFT_HAND"]]
+[connection signal="pressed" from="Panel/XCloseButton" to="." method="_on_close_pressed"]
