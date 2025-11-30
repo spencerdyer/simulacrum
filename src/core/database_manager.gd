@@ -77,43 +77,15 @@ func _ready():
 	_relationships_repo = preload("res://src/core/repositories/relationships_repository.gd").new(_store)
 	
 	# Bootstrap Loaders
-	_game_loader = preload("res://src/core/loaders/game_loader.gd").new(_item_repo, _char_repo, _inv_repo)
+	_game_loader = preload("res://src/core/loaders/game_loader.gd").new(
+		_item_repo, _char_repo, _inv_repo, _world_location_repo, _npc_facts_repo
+	)
 	_game_loader.run()
-	
-	# Initialize world and NPC knowledge
-	_initialize_world()
 	
 	# Bootstrap Systems
 	_equipment_system = preload("res://src/systems/equipment_system.gd").new(_char_repo, _inv_repo, _item_repo)
 	_trade_system = preload("res://src/systems/trade_system.gd").new(_inv_repo)
 	_window_manager = preload("res://src/systems/window_manager.gd").new()
-
-func _initialize_world():
-	# Create the initial world location if it doesn't exist
-	var locations = _world_location_repo.get_all()
-	if locations.is_empty():
-		_world_location_repo.create({
-			"name": "The Void",
-			"type": "area",
-			"description": "An empty gray expanse. There is nothing here but flat ground stretching in all directions.",
-			"npcs_present": ["player_1", "npc_merchant_1"]
-		})
-		print("World initialized: The Void")
-	
-	# Initialize NPC knowledge for the merchant
-	var merchant_facts = _npc_facts_repo.get_by_npc("npc_merchant_1")
-	if merchant_facts.is_empty():
-		# World knowledge
-		_npc_facts_repo.create("npc_merchant_1", "world", 
-			"The world is currently an empty gray void. There are no buildings, no towns, no landmarks - just flat gray ground stretching endlessly.", "initial")
-		_npc_facts_repo.create("npc_merchant_1", "world",
-			"There are only two people in this place: myself and an adventurer who sometimes approaches me.", "initial")
-		
-		# Self knowledge
-		_npc_facts_repo.create("npc_merchant_1", "self",
-			"I am a merchant. I carry goods for trade.", "initial")
-		
-		print("NPC knowledge initialized for merchant")
 
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:

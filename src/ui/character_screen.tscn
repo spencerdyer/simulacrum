@@ -19,10 +19,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -400.0
-offset_top = -300.0
-offset_right = 400.0
-offset_bottom = 300.0
+offset_left = -500.0
+offset_top = -400.0
+offset_right = 500.0
+offset_bottom = 400.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -33,7 +33,7 @@ anchor_right = 1.0
 offset_bottom = 60.0
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="Panel/TitleBar"]
+[node name="TitleLabel" type="Label" parent="Panel/TitleBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,37 +45,6 @@ theme_override_font_sizes/font_size = 32
 text = "CHARACTER SHEET"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
-layout_mode = 0
-offset_left = 30.0
-offset_top = 80.0
-offset_right = 770.0
-offset_bottom = 560.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="NameLabel" type="Label" parent="Panel/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 28
-text = "Name: Hero"
-
-[node name="DescLabel" type="Label" parent="Panel/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Description..."
-autowrap_mode = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="StatsLabel" type="Label" parent="Panel/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Stats..."
 
 [node name="BackButton" type="Button" parent="Panel"]
 layout_mode = 1
@@ -99,6 +68,155 @@ offset_bottom = 50.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 24
 text = "X"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 70.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ContentContainer" type="VBoxContainer" parent="Panel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="NameSection" type="VBoxContainer" parent="Panel/ScrollContainer/ContentContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="Panel/ScrollContainer/ContentContainer/NameSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Character Name"
+
+[node name="OccupationLabel" type="Label" parent="Panel/ScrollContainer/ContentContainer/NameSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "Occupation"
+
+[node name="Separator1" type="HSeparator" parent="Panel/ScrollContainer/ContentContainer"]
+layout_mode = 2
+
+[node name="TwoColumnContainer" type="HBoxContainer" parent="Panel/ScrollContainer/ContentContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="LeftColumn" type="VBoxContainer" parent="Panel/ScrollContainer/ContentContainer/TwoColumnContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+
+[node name="PhysicalHeader" type="Label" parent="Panel/ScrollContainer/ContentContainer/TwoColumnContainer/LeftColumn"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0.9, 0.8, 0.5, 1)
+text = "PHYSICAL TRAITS"
+
+[node name="PhysicalInfo" type="Label" parent="Panel/ScrollContainer/ContentContainer/TwoColumnContainer/LeftColumn"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Age: 25
+Height: 5'10\"
+Weight: 165 lbs
+Eyes: Green
+Hair: Brown"
+
+[node name="StatsHeader" type="Label" parent="Panel/ScrollContainer/ContentContainer/TwoColumnContainer/LeftColumn"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0.9, 0.8, 0.5, 1)
+text = "ATTRIBUTES"
+
+[node name="StatsInfo" type="Label" parent="Panel/ScrollContainer/ContentContainer/TwoColumnContainer/LeftColumn"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Health: 100/100
+Stamina: 50
+Strength: 10
+Dexterity: 12
+Intelligence: 8
+Charisma: 14"
+
+[node name="RightColumn" type="VBoxContainer" parent="Panel/ScrollContainer/ContentContainer/TwoColumnContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+
+[node name="DescHeader" type="Label" parent="Panel/ScrollContainer/ContentContainer/TwoColumnContainer/RightColumn"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0.9, 0.8, 0.5, 1)
+text = "DESCRIPTION"
+
+[node name="DescLabel" type="Label" parent="Panel/ScrollContainer/ContentContainer/TwoColumnContainer/RightColumn"]
+layout_mode = 2
+custom_minimum_size = Vector2(400, 0)
+theme_override_font_sizes/font_size = 18
+text = "A brave adventurer..."
+autowrap_mode = 2
+
+[node name="Separator2" type="HSeparator" parent="Panel/ScrollContainer/ContentContainer"]
+layout_mode = 2
+
+[node name="BackstorySection" type="VBoxContainer" parent="Panel/ScrollContainer/ContentContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="BackstoryHeader" type="Label" parent="Panel/ScrollContainer/ContentContainer/BackstorySection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0.9, 0.8, 0.5, 1)
+text = "BACKSTORY"
+
+[node name="BackstoryLabel" type="Label" parent="Panel/ScrollContainer/ContentContainer/BackstorySection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Born in the void, raised by pixels..."
+autowrap_mode = 2
+
+[node name="Separator3" type="HSeparator" parent="Panel/ScrollContainer/ContentContainer"]
+layout_mode = 2
+
+[node name="RoutineSection" type="VBoxContainer" parent="Panel/ScrollContainer/ContentContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RoutineHeader" type="Label" parent="Panel/ScrollContainer/ContentContainer/RoutineSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0.9, 0.8, 0.5, 1)
+text = "DAILY ROUTINE"
+
+[node name="RoutineLabel" type="Label" parent="Panel/ScrollContainer/ContentContainer/RoutineSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Wanders the land seeking adventure..."
+autowrap_mode = 2
+
+[node name="Separator4" type="HSeparator" parent="Panel/ScrollContainer/ContentContainer"]
+layout_mode = 2
+
+[node name="FactSection" type="VBoxContainer" parent="Panel/ScrollContainer/ContentContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="FactHeader" type="Label" parent="Panel/ScrollContainer/ContentContainer/FactSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0.9, 0.8, 0.5, 1)
+text = "INTERESTING FACT"
+
+[node name="FactLabel" type="Label" parent="Panel/ScrollContainer/ContentContainer/FactSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Something interesting about this character..."
+autowrap_mode = 2
 
 [connection signal="gui_input" from="Panel/TitleBar" to="." method="_on_titlebar_gui_input"]
 [connection signal="pressed" from="Panel/BackButton" to="." method="_on_back_pressed"]

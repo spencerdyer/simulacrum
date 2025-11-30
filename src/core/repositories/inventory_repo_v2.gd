@@ -85,3 +85,31 @@ func set_equipped(instance_id: String, is_equipped: bool):
 			item["equipped"] = is_equipped
 			if _store: _store.save_data()
 			return
+
+func remove_item(instance_id: String):
+	var list = get_all()
+	if list == null: return
+	
+	for i in range(list.size() - 1, -1, -1):
+		var item = list[i]
+		if item == null: continue
+		if not item is Dictionary: continue
+		
+		if item.get("instance_id") == instance_id:
+			list.remove_at(i)
+			if _store: _store.save_data()
+			return
+
+func clear_owner_inventory(owner_id: String):
+	var list = get_all()
+	if list == null: return
+	
+	for i in range(list.size() - 1, -1, -1):
+		var item = list[i]
+		if item == null: continue
+		if not item is Dictionary: continue
+		
+		if item.get("owner_id") == owner_id:
+			list.remove_at(i)
+	
+	if _store: _store.save_data()

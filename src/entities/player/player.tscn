@@ -5,19 +5,29 @@
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1"]
 size = Vector2(64, 64)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1"]
-radius = 32.0
-height = 64.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 24.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_script")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.2, 0.6, 1, 1)
 texture = SubResource("PlaceholderTexture2D_1")
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.75, 0.75)
+
+[node name="FacingIndicator" type="Node2D" parent="."]
+
+[node name="Arrow" type="ColorRect" parent="FacingIndicator"]
+offset_left = -5.0
+offset_top = -40.0
+offset_right = 5.0
+offset_bottom = -20.0
+color = Color(1, 1, 0.3, 0.9)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_1")
+shape = SubResource("CircleShape2D_1")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.75, 0.75)
 position_smoothing_enabled = true
