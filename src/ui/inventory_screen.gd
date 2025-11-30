@@ -1,13 +1,42 @@
 extends Control
 
+signal back_requested
+signal closed
+
 @onready var inventory_list = $Panel/HBoxContainer/InventoryPanel/ScrollContainer/VBoxContainer
 @onready var equipment_panel = $Panel/HBoxContainer/EquipmentPanel/VBoxContainer
+@onready var panel = $Panel
+@onready var back_button = $Panel/BackButton
 
-# Drag Data Structure:
-# { "type": "inventory_item", "item": dictionary_data }
+var opener_window_id = ""
+
+# Dragging state
+var dragging = false
+var drag_offset = Vector2.ZERO
+const TITLE_BAR_HEIGHT = 40
 
 func _ready():
+	back_button.visible = false
+
+func open(opener_id: String = ""):
+	opener_window_id = opener_id
+	
+	if DatabaseManager.windows.is_window_open("inventory", "player"):
+		print("Inventory screen already open")
+		return false
+	
+	DatabaseManager.windows.register_window("inventory", "player", self, opener_id)
+	
+	back_button.visible = (opener_id != "")
+	
+	visible = true
+	_center_panel()
 	update_display()
+	return true
+
+func _center_panel():
+	var viewport_size = get_viewport_rect().size
+	panel.position = (viewport_size - panel.size) / 2
 
 func update_display():
 	var player = DatabaseManager.characters.get_player()
@@ -22,12 +51,10 @@ func update_display():
 	# 2. Populate Inventory List
 	var inventory = DatabaseManager.inventory.get_by_owner(player_id)
 	for item in inventory:
-		# Create a custom button script or attach logic dynamically
 		var btn = Button.new()
 		btn.text = item["name"] + " (" + item["type"] + ")"
 		btn.mouse_filter = Control.MOUSE_FILTER_PASS
 		
-		# Attach a script to handle drag data locally for this button
 		btn.set_script(preload("res://src/ui/draggable_item.gd")) 
 		btn.item_data = item
 		
@@ -36,11 +63,7 @@ func update_display():
 	# 3. Update Equipment Slots
 	var equipment = DatabaseManager.get_player_equipment(player_id)
 	
-	# We iterate through known UI slots by name
 	var slots = ["HEAD", "CHEST", "LEGS", "RIGHT_HAND", "LEFT_HAND"]
-	
-	# We need to map the generic VBox children to these slots
-	# Assuming VBox children order matches: Head, Chest, Legs, Right, Left
 	var ui_slots = equipment_panel.get_children()
 	
 	for i in range(slots.size()):
@@ -49,20 +72,17 @@ func update_display():
 			var slot_btn = ui_slots[i]
 			var item = equipment.get(slot_name)
 			
-			# Set visual text
 			if item:
 				slot_btn.text = slot_name + ": " + item["name"]
 			else:
 				slot_btn.text = slot_name + ": Empty"
 				
-			# Attach drop logic script
 			if not slot_btn.get_script():
 				slot_btn.set_script(preload("res://src/ui/equipment_slot.gd"))
 			
 			slot_btn.slot_type = slot_name
-			slot_btn.equipped_item = item # Store for logic if needed
+			slot_btn.equipped_item = item
 			
-			# Disconnect old signals to avoid duplicates if re-running
 			if slot_btn.pressed.is_connected(_on_slot_pressed):
 				slot_btn.pressed.disconnect(_on_slot_pressed)
 			slot_btn.pressed.connect(_on_slot_pressed.bind(slot_name))
@@ -74,6 +94,25 @@ func _on_slot_pressed(slot_name):
 		update_display()
 
 func _on_close_pressed():
-	visible = false
+	_close_window()
 
-# Global drag and drop handling is delegated to individual controls (scripts below)
+func _on_back_pressed():
+	emit_signal("back_requested")
+	_close_window()
+
+func _close_window():
+	DatabaseManager.windows.close_window("inventory", "player")
+	visible = false
+	emit_signal("closed")
+
+# TitleBar dragging
+func _on_titlebar_gui_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				dragging = true
+			else:
+				dragging = false
+				
+	elif event is InputEventMouseMotion and dragging:
+		panel.position += event.relative

@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3k8d2y5r7x1"]
+[gd_scene load_steps=2 format=3 uid="uid://load_menu_001"]
 
-[ext_resource type="Script" path="res://src/ui/character_screen.gd" id="1_script"]
+[ext_resource type="Script" path="res://src/ui/system_menu/load_menu.gd" id="1_script"]
 
-[node name="CharacterScreen" type="Control"]
+[node name="LoadMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,7 +30,7 @@ grow_vertical = 2
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 60.0
+offset_bottom = 50.0
 grow_horizontal = 2
 
 [node name="Label" type="Label" parent="Panel/TitleBar"]
@@ -41,41 +41,37 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_font_sizes/font_size = 32
-text = "CHARACTER SHEET"
+theme_override_font_sizes/font_size = 28
+text = "LOAD GAME"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
-layout_mode = 0
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = 30.0
-offset_top = 80.0
-offset_right = 770.0
-offset_bottom = 560.0
+offset_top = 60.0
+offset_right = -30.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SaveList" type="VBoxContainer" parent="Panel/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 12
 
-[node name="NameLabel" type="Label" parent="Panel/HBoxContainer/VBoxContainer"]
+[node name="StatusLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 28
-text = "Name: Hero"
-
-[node name="DescLabel" type="Label" parent="Panel/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Description..."
-autowrap_mode = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="StatsLabel" type="Label" parent="Panel/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Stats..."
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
 
 [node name="BackButton" type="Button" parent="Panel"]
 layout_mode = 1
@@ -83,7 +79,7 @@ anchors_preset = 0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 50.0
-offset_bottom = 50.0
+offset_bottom = 45.0
 theme_override_font_sizes/font_size = 24
 text = "<"
 
@@ -92,10 +88,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -50.0
+offset_left = -45.0
 offset_top = 10.0
-offset_right = -10.0
-offset_bottom = 50.0
+offset_right = -5.0
+offset_bottom = 45.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 24
 text = "X"

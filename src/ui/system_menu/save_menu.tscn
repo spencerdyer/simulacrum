@@ -1,16 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://interaction_menu_123"]
+[gd_scene load_steps=2 format=3 uid="uid://save_menu_001"]
 
-[ext_resource type="Script" path="res://src/ui/interaction_menu.gd" id="1_script"]
+[ext_resource type="Script" path="res://src/ui/system_menu/save_menu.gd" id="1_script"]
 
-[node name="InteractionMenu" type="Control"]
+[node name="SaveMenu" type="Control"]
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_script")
 
 [node name="Panel" type="Panel" parent="."]
@@ -20,9 +19,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -150.0
+offset_left = -300.0
 offset_top = -150.0
-offset_right = 150.0
+offset_right = 300.0
 offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -43,7 +42,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_font_sizes/font_size = 28
-text = "NPC"
+text = "SAVE GAME"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -52,34 +51,43 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 15.0
-offset_top = 55.0
-offset_right = -15.0
-offset_bottom = -15.0
+offset_left = 30.0
+offset_top = 60.0
+offset_right = -30.0
+offset_bottom = -30.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
-theme_override_constants/separation = 12
+theme_override_constants/separation = 16
 
-[node name="TalkButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="FilenameLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Talk"
+text = "Save File Name:"
 
-[node name="TradeButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="FilenameInput" type="LineEdit" parent="Panel/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Trade"
+placeholder_text = "Enter save name..."
 
-[node name="InspectButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="SaveButton" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Inspect"
+text = "Save"
 
-[node name="CloseButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="StatusLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 45.0
 theme_override_font_sizes/font_size = 24
-text = "Leave"
+text = "<"
 
 [node name="XCloseButton" type="Button" parent="Panel"]
 layout_mode = 1
@@ -87,7 +95,7 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -45.0
-offset_top = 5.0
+offset_top = 10.0
 offset_right = -5.0
 offset_bottom = 45.0
 grow_horizontal = 0
@@ -95,8 +103,6 @@ theme_override_font_sizes/font_size = 24
 text = "X"
 
 [connection signal="gui_input" from="Panel/TitleBar" to="." method="_on_titlebar_gui_input"]
-[connection signal="pressed" from="Panel/VBoxContainer/TalkButton" to="." method="_on_talk_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/TradeButton" to="." method="_on_trade_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/InspectButton" to="." method="_on_inspect_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/CloseButton" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/SaveButton" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Panel/BackButton" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="Panel/XCloseButton" to="." method="_on_close_pressed"]

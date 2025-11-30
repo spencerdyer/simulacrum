@@ -1,0 +1,177 @@
+[gd_scene load_steps=2 format=3 uid="uid://settings_menu_001"]
+
+[ext_resource type="Script" path="res://src/ui/system_menu/settings_menu.gd" id="1_script"]
+
+[node name="SettingsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -300.0
+offset_right = 450.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleBar" type="Panel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Panel/TitleBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 28
+text = "SETTINGS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 60.0
+offset_right = -30.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="SectionLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "LLM Provider Settings"
+horizontal_alignment = 1
+
+[node name="ProviderContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ProviderLabel" type="Label" parent="Panel/VBoxContainer/ProviderContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "Provider:"
+
+[node name="ProviderDropdown" type="OptionButton" parent="Panel/VBoxContainer/ProviderContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+
+[node name="ApiKeyContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ApiKeyLabel" type="Label" parent="Panel/VBoxContainer/ApiKeyContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "API Key:"
+
+[node name="ApiKeyInput" type="LineEdit" parent="Panel/VBoxContainer/ApiKeyContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+placeholder_text = "Enter API key..."
+secret = true
+
+[node name="ModelContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ModelLabel" type="Label" parent="Panel/VBoxContainer/ModelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "Model:"
+
+[node name="ModelDropdown" type="OptionButton" parent="Panel/VBoxContainer/ModelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+
+[node name="FetchButton" type="Button" parent="Panel/VBoxContainer/ModelContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Fetch"
+
+[node name="Separator" type="HSeparator" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="GameSettingsLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Game Settings"
+horizontal_alignment = 1
+
+[node name="SpeculationContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="SpeculationLabel" type="Label" parent="Panel/VBoxContainer/SpeculationContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "NPC Knowledge Mode:"
+
+[node name="SpeculationDropdown" type="OptionButton" parent="Panel/VBoxContainer/SpeculationContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+
+[node name="StatusLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 45.0
+theme_override_font_sizes/font_size = 24
+text = "<"
+
+[node name="XCloseButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -45.0
+offset_top = 10.0
+offset_right = -5.0
+offset_bottom = 45.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 24
+text = "X"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[connection signal="gui_input" from="Panel/TitleBar" to="." method="_on_titlebar_gui_input"]
+[connection signal="item_selected" from="Panel/VBoxContainer/ProviderContainer/ProviderDropdown" to="." method="_on_provider_changed"]
+[connection signal="text_changed" from="Panel/VBoxContainer/ApiKeyContainer/ApiKeyInput" to="." method="_on_api_key_changed"]
+[connection signal="item_selected" from="Panel/VBoxContainer/ModelContainer/ModelDropdown" to="." method="_on_model_selected"]
+[connection signal="pressed" from="Panel/VBoxContainer/ModelContainer/FetchButton" to="." method="_on_fetch_models_pressed"]
+[connection signal="item_selected" from="Panel/VBoxContainer/SpeculationContainer/SpeculationDropdown" to="." method="_on_speculation_changed"]
+[connection signal="pressed" from="Panel/BackButton" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Panel/XCloseButton" to="." method="_on_close_pressed"]

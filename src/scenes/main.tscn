@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4k8d2y5r7x3"]
+[gd_scene load_steps=14 format=3 uid="uid://b4k8d2y5r7x3"]
 
 [ext_resource type="Script" path="res://src/scenes/main.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://c8k8d2y5r7x9" path="res://src/entities/player/player.tscn" id="2_player"]
@@ -8,30 +8,37 @@
 [ext_resource type="PackedScene" uid="uid://f5k8d2y5r7x4" path="res://src/ui/inventory_screen.tscn" id="5_invscreen"]
 [ext_resource type="PackedScene" uid="uid://trade_screen_456" path="res://src/ui/trade_screen.tscn" id="6_tradescreen"]
 [ext_resource type="PackedScene" uid="uid://interaction_menu_123" path="res://src/ui/interaction_menu.tscn" id="7_interactmenu"]
+[ext_resource type="PackedScene" uid="uid://dialogue_window_001" path="res://src/ui/dialogue_window.tscn" id="8_dialogue"]
+[ext_resource type="PackedScene" uid="uid://system_menu_001" path="res://src/ui/system_menu/system_menu.tscn" id="9_sysmenu"]
+[ext_resource type="PackedScene" uid="uid://save_menu_001" path="res://src/ui/system_menu/save_menu.tscn" id="10_savemenu"]
+[ext_resource type="PackedScene" uid="uid://load_menu_001" path="res://src/ui/system_menu/load_menu.tscn" id="11_loadmenu"]
+[ext_resource type="PackedScene" uid="uid://settings_menu_001" path="res://src/ui/system_menu/settings_menu.tscn" id="12_settingsmenu"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_script")
 
 [node name="Background" type="ColorRect" parent="."]
-offset_left = -2000.0
-offset_top = -2000.0
-offset_right = 2000.0
-offset_bottom = 2000.0
+offset_left = -4000.0
+offset_top = -4000.0
+offset_right = 4000.0
+offset_bottom = 4000.0
 mouse_filter = 2
 color = Color(0.133333, 0.133333, 0.133333, 1)
 
 [node name="Label" type="Label" parent="."]
-offset_left = -100.0
-offset_top = -150.0
-offset_right = 100.0
-offset_bottom = -100.0
+offset_left = -200.0
+offset_top = -300.0
+offset_right = 200.0
+offset_bottom = -200.0
+theme_override_font_sizes/font_size = 32
 text = "Click anywhere to move"
+horizontal_alignment = 1
 
 [node name="Player" parent="." instance=ExtResource("2_player")]
-position = Vector2(576, 324)
+position = Vector2(1152, 648)
 
 [node name="MerchantNPC" parent="." instance=ExtResource("2_npc")]
-position = Vector2(700, 324)
+position = Vector2(1400, 648)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -47,6 +54,21 @@ visible = false
 visible = false
 
 [node name="InteractionMenu" parent="CanvasLayer" instance=ExtResource("7_interactmenu")]
+visible = false
+
+[node name="DialogueWindow" parent="CanvasLayer" instance=ExtResource("8_dialogue")]
+visible = false
+
+[node name="SystemMenu" parent="CanvasLayer" instance=ExtResource("9_sysmenu")]
+visible = false
+
+[node name="SaveMenu" parent="CanvasLayer" instance=ExtResource("10_savemenu")]
+visible = false
+
+[node name="LoadMenu" parent="CanvasLayer" instance=ExtResource("11_loadmenu")]
+visible = false
+
+[node name="SettingsMenu" parent="CanvasLayer" instance=ExtResource("12_settingsmenu")]
 visible = false
 
 [connection signal="toggle_character_screen" from="CanvasLayer/HUD" to="." method="_on_hud_toggle_character_screen"]

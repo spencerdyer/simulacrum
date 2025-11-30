@@ -1,0 +1,11 @@
+Summarize the following conversation between {{npc_name}} and {{player_name}} in 2-3 sentences. Focus on:
+- Key topics discussed
+- Any agreements or disagreements
+- Important information exchanged
+- The overall tone of the conversation
+
+Conversation:
+{{conversation_text}}
+
+Write only the summary, nothing else.
+

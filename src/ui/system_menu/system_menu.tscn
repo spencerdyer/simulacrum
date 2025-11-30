@@ -1,16 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://interaction_menu_123"]
+[gd_scene load_steps=2 format=3 uid="uid://system_menu_001"]
 
-[ext_resource type="Script" path="res://src/ui/interaction_menu.gd" id="1_script"]
+[ext_resource type="Script" path="res://src/ui/system_menu/system_menu.gd" id="1_script"]
 
-[node name="InteractionMenu" type="Control"]
+[node name="SystemMenu" type="Control"]
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_script")
 
 [node name="Panel" type="Panel" parent="."]
@@ -20,10 +19,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -150.0
-offset_right = 150.0
-offset_bottom = 150.0
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -43,7 +42,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_font_sizes/font_size = 28
-text = "NPC"
+text = "SYSTEM MENU"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -52,34 +51,33 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 15.0
-offset_top = 55.0
-offset_right = -15.0
-offset_bottom = -15.0
+offset_left = 30.0
+offset_top = 60.0
+offset_right = -30.0
+offset_bottom = -30.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
-theme_override_constants/separation = 12
+theme_override_constants/separation = 16
 
-[node name="TalkButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="SaveButton" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Talk"
+text = "Save Game"
 
-[node name="TradeButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="LoadButton" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Trade"
+text = "Load Game"
 
-[node name="InspectButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Inspect"
+text = "Settings"
 
-[node name="CloseButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="ExitButton" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Leave"
+text = "Exit Game"
 
 [node name="XCloseButton" type="Button" parent="Panel"]
 layout_mode = 1
@@ -95,8 +93,8 @@ theme_override_font_sizes/font_size = 24
 text = "X"
 
 [connection signal="gui_input" from="Panel/TitleBar" to="." method="_on_titlebar_gui_input"]
-[connection signal="pressed" from="Panel/VBoxContainer/TalkButton" to="." method="_on_talk_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/TradeButton" to="." method="_on_trade_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/InspectButton" to="." method="_on_inspect_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/CloseButton" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/SaveButton" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/LoadButton" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/SettingsButton" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/ExitButton" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Panel/XCloseButton" to="." method="_on_close_pressed"]

@@ -19,28 +19,40 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -350.0
-offset_top = -250.0
-offset_right = 350.0
-offset_bottom = 250.0
+offset_left = -500.0
+offset_top = -350.0
+offset_right = 500.0
+offset_bottom = 350.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Panel"]
-layout_mode = 0
-offset_right = 700.0
-offset_bottom = 40.0
+[node name="TitleBar" type="Panel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 60.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Panel/TitleBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 32
 text = "INVENTORY & EQUIPMENT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 50.0
-offset_right = 680.0
-offset_bottom = 480.0
-theme_override_constants/separation = 20
+offset_left = 30.0
+offset_top = 80.0
+offset_right = 970.0
+offset_bottom = 680.0
+theme_override_constants/separation = 30
 
 [node name="InventoryPanel" type="Panel" parent="Panel/HBoxContainer"]
 layout_mode = 2
@@ -50,8 +62,9 @@ size_flags_horizontal = 3
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 30.0
+offset_bottom = 50.0
 grow_horizontal = 2
+theme_override_font_sizes/font_size = 28
 text = "Backpack"
 horizontal_alignment = 1
 
@@ -60,7 +73,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 30.0
+offset_top = 50.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -77,8 +90,9 @@ size_flags_horizontal = 3
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 30.0
+offset_bottom = 50.0
 grow_horizontal = 2
+theme_override_font_sizes/font_size = 28
 text = "Equipment"
 horizontal_alignment = 1
 
@@ -87,47 +101,67 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 40.0
-offset_right = -10.0
-offset_bottom = -10.0
+offset_left = 15.0
+offset_top = 60.0
+offset_right = -15.0
+offset_bottom = -15.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 15
 
 [node name="HeadSlot" type="Button" parent="Panel/HBoxContainer/EquipmentPanel/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "HEAD: Empty"
 
 [node name="ChestSlot" type="Button" parent="Panel/HBoxContainer/EquipmentPanel/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "CHEST: Empty"
 
 [node name="LegsSlot" type="Button" parent="Panel/HBoxContainer/EquipmentPanel/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "LEGS: Empty"
 
 [node name="RightHandSlot" type="Button" parent="Panel/HBoxContainer/EquipmentPanel/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "RIGHT_HAND: Empty"
 
 [node name="LeftHandSlot" type="Button" parent="Panel/HBoxContainer/EquipmentPanel/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "LEFT_HAND: Empty"
+
+[node name="BackButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 24
+text = "<"
 
 [node name="XCloseButton" type="Button" parent="Panel"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -25.0
-offset_bottom = 25.0
+offset_left = -50.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 50.0
 grow_horizontal = 0
+theme_override_font_sizes/font_size = 24
 text = "X"
 
+[connection signal="gui_input" from="Panel/TitleBar" to="." method="_on_titlebar_gui_input"]
 [connection signal="pressed" from="Panel/HBoxContainer/EquipmentPanel/VBoxContainer/HeadSlot" to="." method="_on_slot_pressed" binds= ["HEAD"]]
 [connection signal="pressed" from="Panel/HBoxContainer/EquipmentPanel/VBoxContainer/ChestSlot" to="." method="_on_slot_pressed" binds= ["CHEST"]]
 [connection signal="pressed" from="Panel/HBoxContainer/EquipmentPanel/VBoxContainer/LegsSlot" to="." method="_on_slot_pressed" binds= ["LEGS"]]
 [connection signal="pressed" from="Panel/HBoxContainer/EquipmentPanel/VBoxContainer/RightHandSlot" to="." method="_on_slot_pressed" binds= ["RIGHT_HAND"]]
 [connection signal="pressed" from="Panel/HBoxContainer/EquipmentPanel/VBoxContainer/LeftHandSlot" to="." method="_on_slot_pressed" binds= ["LEFT_HAND"]]
+[connection signal="pressed" from="Panel/BackButton" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="Panel/XCloseButton" to="." method="_on_close_pressed"]

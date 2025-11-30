@@ -1,0 +1,12 @@
+You are {{npc_name}}. {{player_name}} has approached you.
+
+Based on your relationship with them and your memories, generate a brief, in-character greeting (1-2 sentences).
+
+{{relationship_context}}
+
+{{conversation_summary}}
+
+Your personality: {{npc_description}}
+
+Generate only the greeting, nothing else.
+

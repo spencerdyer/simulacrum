@@ -1,0 +1,166 @@
+[gd_scene load_steps=2 format=3 uid="uid://dialogue_window_001"]
+
+[ext_resource type="Script" path="res://src/ui/dialogue_window.gd" id="1_script"]
+
+[node name="DialogueWindow" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -400.0
+offset_right = 450.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleBar" type="Panel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Panel/TitleBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 28
+text = "Talking to: NPC"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 60.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="TabContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CurrentTab" type="Button" parent="Panel/VBoxContainer/TabContainer"]
+layout_mode = 2
+disabled = true
+theme_override_font_sizes/font_size = 22
+text = "Current"
+
+[node name="HistoryTab" type="Button" parent="Panel/VBoxContainer/TabContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "History"
+
+[node name="ContentContainer" type="Control" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CurrentChat" type="Control" parent="Panel/VBoxContainer/ContentContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer/ContentContainer/CurrentChat"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MessagesContainer" type="VBoxContainer" parent="Panel/VBoxContainer/ContentContainer/CurrentChat/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 24
+
+[node name="HistoryPanel" type="Control" parent="Panel/VBoxContainer/ContentContainer"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer/ContentContainer/HistoryPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HistoryMessages" type="VBoxContainer" parent="Panel/VBoxContainer/ContentContainer/HistoryPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 24
+
+[node name="StatusLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="InputContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="InputField" type="LineEdit" parent="Panel/VBoxContainer/InputContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 28
+placeholder_text = "Type your message..."
+
+[node name="SendButton" type="Button" parent="Panel/VBoxContainer/InputContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Send"
+
+[node name="XCloseButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -45.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = 45.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 24
+text = "X"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="SummaryHTTPRequest" type="HTTPRequest" parent="."]
+
+[connection signal="gui_input" from="Panel/TitleBar" to="." method="_on_titlebar_gui_input"]
+[connection signal="text_submitted" from="Panel/VBoxContainer/InputContainer/InputField" to="." method="_on_input_text_submitted"]
+[connection signal="pressed" from="Panel/VBoxContainer/InputContainer/SendButton" to="." method="_on_send_pressed"]
+[connection signal="pressed" from="Panel/XCloseButton" to="." method="_on_close_pressed"]
