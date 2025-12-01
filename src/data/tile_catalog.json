@@ -1,0 +1,304 @@
+{
+	"_description": "Tile catalog for PixelFantasy tilesets. Each tile has coordinates, name, description (for LLM context), and tags for programmatic use.",
+	"_tile_size": 48,
+	
+	"sources": {
+		"A5": {
+			"id": 0,
+			"file": "PixelFantasy_Outside_A5.png",
+			"description": "Ground and floor tiles",
+			"columns": 8,
+			"rows": 16
+		},
+		"B": {
+			"id": 1,
+			"file": "PixelFantasy_Outside_B.png",
+			"description": "Decorations, furniture, and objects",
+			"columns": 16,
+			"rows": 16
+		},
+		"C": {
+			"id": 3,
+			"file": "PixelFantasy_Outside_C.png",
+			"description": "Building exteriors, roofs, walls, and large structures",
+			"columns": 16,
+			"rows": 16
+		},
+		"D_Trees": {
+			"id": 2,
+			"file": "PixelFantasy_Outside_D-Trees.png",
+			"description": "Large multi-tile trees",
+			"columns": 16,
+			"rows": 16
+		}
+	},
+	
+	"tiles": {
+		"ground": {
+			"grass": {
+				"source": "A5",
+				"x": 0,
+				"y": 2,
+				"name": "Grass",
+				"description": "Lush green grass, soft underfoot",
+				"tags": ["walkable", "outdoor", "natural", "ground"]
+			},
+			"dirt": {
+				"source": "A5",
+				"x": 2,
+				"y": 2,
+				"name": "Dirt Path",
+				"description": "Packed earth, well-trodden",
+				"tags": ["walkable", "outdoor", "path", "ground"]
+			}
+		},
+		
+		"stone": {
+			"cobblestone_gray": {
+				"source": "A5",
+				"x": 4,
+				"y": 5,
+				"name": "Gray Cobblestone",
+				"description": "Worn gray cobblestones, typical of village paths",
+				"tags": ["walkable", "outdoor", "path", "ground", "stone"]
+			},
+			"flagstone_large": {
+				"source": "A5",
+				"x": 4,
+				"y": 5,
+				"name": "Large Flagstone",
+				"description": "Broad gray flagstones, used in plazas",
+				"tags": ["walkable", "outdoor", "path", "ground", "stone"]
+			}
+		},
+		
+		"floors": {
+			"wood_plank": {
+				"source": "A5",
+				"x": 5,
+				"y": 5,
+				"name": "Wood Planks",
+				"description": "Sturdy wooden floorboards",
+				"tags": ["walkable", "indoor", "floor", "wood"]
+			},
+			"stone_floor": {
+				"source": "A5",
+				"x": 4,
+				"y": 5,
+				"name": "Stone Floor",
+				"description": "Smooth stone flooring",
+				"tags": ["walkable", "indoor", "floor", "stone"]
+			}
+		},
+		
+		"farmland": {
+			"tilled_soil": {
+				"source": "A5",
+				"x": 0,
+				"y": 4,
+				"name": "Tilled Soil",
+				"description": "Freshly tilled farmland rows",
+				"tags": ["walkable", "outdoor", "farm", "ground"]
+			},
+			"crops_growing": {
+				"source": "A5",
+				"x": 0,
+				"y": 5,
+				"name": "Growing Crops",
+				"description": "Young green crops sprouting in rows",
+				"tags": ["walkable", "outdoor", "farm", "ground"]
+			}
+		},
+		
+		"decorations": {
+			"well": {
+				"source": "B",
+				"x": 11,
+				"y": 0,
+				"name": "Stone Well",
+				"description": "A stone well with wooden frame, source of fresh water",
+				"tags": ["obstacle", "outdoor", "structure", "water_source"]
+			},
+			"barrel": {
+				"source": "B",
+				"x": 13,
+				"y": 0,
+				"name": "Wooden Barrel",
+				"description": "A sturdy wooden barrel, used for storage",
+				"tags": ["obstacle", "outdoor", "indoor", "container"]
+			},
+			"crate": {
+				"source": "B",
+				"x": 12,
+				"y": 0,
+				"name": "Wooden Crate",
+				"description": "A wooden storage crate",
+				"tags": ["obstacle", "outdoor", "indoor", "container"]
+			},
+			"bench_wood": {
+				"source": "B",
+				"x": 14,
+				"y": 0,
+				"name": "Wooden Bench",
+				"description": "A simple wooden bench for resting",
+				"tags": ["obstacle", "outdoor", "furniture", "seating"]
+			},
+			"gravestone": {
+				"source": "B",
+				"x": 15,
+				"y": 0,
+				"name": "Gravestone",
+				"description": "A weathered stone grave marker",
+				"tags": ["obstacle", "outdoor", "memorial"]
+			},
+			"bush_small": {
+				"source": "B",
+				"x": 9,
+				"y": 1,
+				"name": "Small Bush",
+				"description": "A small green shrub",
+				"tags": ["obstacle", "outdoor", "natural", "plant"]
+			},
+			"rock_gray": {
+				"source": "B",
+				"x": 15,
+				"y": 1,
+				"name": "Gray Rock",
+				"description": "A large gray boulder",
+				"tags": ["obstacle", "outdoor", "natural"]
+			},
+			"flower_red": {
+				"source": "B",
+				"x": 10,
+				"y": 2,
+				"name": "Red Flowers",
+				"description": "A patch of bright red flowers",
+				"tags": ["walkable", "outdoor", "natural", "plant", "decorative"]
+			},
+			"flower_pink": {
+				"source": "B",
+				"x": 11,
+				"y": 2,
+				"name": "Pink Flowers",
+				"description": "Delicate pink wildflowers",
+				"tags": ["walkable", "outdoor", "natural", "plant", "decorative"]
+			},
+			"flower_purple": {
+				"source": "B",
+				"x": 12,
+				"y": 2,
+				"name": "Purple Flowers",
+				"description": "Vibrant purple blooms",
+				"tags": ["walkable", "outdoor", "natural", "plant", "decorative"]
+			},
+			"stump": {
+				"source": "B",
+				"x": 9,
+				"y": 2,
+				"name": "Tree Stump",
+				"description": "The remains of a felled tree",
+				"tags": ["obstacle", "outdoor", "natural"]
+			},
+			"log": {
+				"source": "B",
+				"x": 13,
+				"y": 1,
+				"name": "Wooden Log",
+				"description": "A cut log, ready for the fire",
+				"tags": ["obstacle", "outdoor", "resource"]
+			}
+		},
+		
+		"signs": {
+			"sign_inn": {
+				"source": "B",
+				"x": 6,
+				"y": 4,
+				"name": "Inn Sign",
+				"description": "A hanging sign reading 'INN'",
+				"tags": ["obstacle", "outdoor", "sign", "building_marker"]
+			},
+			"sign_weapon": {
+				"source": "B",
+				"x": 1,
+				"y": 4,
+				"name": "Weapon Shop Sign",
+				"description": "A sign with crossed swords, marking a weapon shop",
+				"tags": ["obstacle", "outdoor", "sign", "building_marker"]
+			},
+			"sign_shield": {
+				"source": "B",
+				"x": 2,
+				"y": 4,
+				"name": "Armor Shop Sign",
+				"description": "A sign depicting a shield, marking an armor shop",
+				"tags": ["obstacle", "outdoor", "sign", "building_marker"]
+			}
+		},
+		
+		"trees": {
+			"tree_green_large": {
+				"source": "D_Trees",
+				"x": 0,
+				"y": 0,
+				"name": "Large Green Tree",
+				"description": "A tall, leafy deciduous tree with lush green foliage",
+				"tags": ["obstacle", "outdoor", "natural", "tree", "multi_tile"],
+				"size": {"width": 2, "height": 2}
+			},
+			"tree_green_medium": {
+				"source": "D_Trees",
+				"x": 2,
+				"y": 0,
+				"name": "Medium Green Tree",
+				"description": "A healthy green tree providing shade",
+				"tags": ["obstacle", "outdoor", "natural", "tree"]
+			},
+			"tree_autumn_large": {
+				"source": "D_Trees",
+				"x": 4,
+				"y": 0,
+				"name": "Large Autumn Tree",
+				"description": "A tree with golden autumn leaves",
+				"tags": ["obstacle", "outdoor", "natural", "tree", "autumn", "multi_tile"],
+				"size": {"width": 2, "height": 2}
+			},
+			"tree_red_large": {
+				"source": "D_Trees",
+				"x": 8,
+				"y": 4,
+				"name": "Large Red Tree",
+				"description": "A tree ablaze with deep red fall colors",
+				"tags": ["obstacle", "outdoor", "natural", "tree", "autumn", "multi_tile"],
+				"size": {"width": 2, "height": 2}
+			}
+		},
+		
+		"buildings": {
+			"_note": "Building tiles from C tileset - roofs, walls, doors, windows",
+			"roof_orange_tl": {"source": "C", "x": 8, "y": 2, "name": "Orange Roof Top-Left", "tags": ["building", "roof"]},
+			"roof_orange_tr": {"source": "C", "x": 9, "y": 2, "name": "Orange Roof Top-Right", "tags": ["building", "roof"]},
+			"roof_orange_bl": {"source": "C", "x": 8, "y": 3, "name": "Orange Roof Bottom-Left", "tags": ["building", "roof"]},
+			"roof_orange_br": {"source": "C", "x": 9, "y": 3, "name": "Orange Roof Bottom-Right", "tags": ["building", "roof"]},
+			"roof_brown_tl": {"source": "C", "x": 12, "y": 2, "name": "Brown Roof Top-Left", "tags": ["building", "roof"]},
+			"roof_brown_tr": {"source": "C", "x": 13, "y": 2, "name": "Brown Roof Top-Right", "tags": ["building", "roof"]},
+			"roof_brown_bl": {"source": "C", "x": 12, "y": 3, "name": "Brown Roof Bottom-Left", "tags": ["building", "roof"]},
+			"roof_brown_br": {"source": "C", "x": 13, "y": 3, "name": "Brown Roof Bottom-Right", "tags": ["building", "roof"]},
+			"wall_brick_tan": {"source": "C", "x": 8, "y": 4, "name": "Tan Brick Wall", "tags": ["building", "wall"]},
+			"wall_brick_brown": {"source": "C", "x": 12, "y": 4, "name": "Brown Brick Wall", "tags": ["building", "wall"]},
+			"window_wood": {"source": "B", "x": 0, "y": 8, "name": "Wooden Window", "tags": ["building", "window"]},
+			"window_wood_open": {"source": "B", "x": 1, "y": 8, "name": "Open Wooden Window", "tags": ["building", "window"]},
+			"door_wood": {"source": "B", "x": 4, "y": 10, "name": "Wooden Door", "tags": ["building", "door", "entry"]},
+			"door_arched": {"source": "B", "x": 5, "y": 10, "name": "Arched Door", "tags": ["building", "door", "entry"]}
+		}
+	},
+	
+	"terrain_descriptions": {
+		"village_square": "The village square is paved with worn gray cobblestones, polished smooth by years of foot traffic. A stone well stands at the center.",
+		"main_road": "A well-maintained dirt road runs through the village, packed firm by countless travelers and carts.",
+		"grass_field": "Soft green grass stretches across the open ground, swaying gently in the breeze.",
+		"forest_edge": "The edge of the forest, where grass gives way to fallen leaves and the shadows of tall trees.",
+		"farmland": "Neat rows of tilled earth with young crops sprouting, tended by the village farmers."
+	}
+}
+

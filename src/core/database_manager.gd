@@ -10,14 +10,23 @@ var _npc_facts_repo
 var _npc_memories_repo
 var _conversation_repo
 var _relationships_repo
+var _sprite_repo
+var _tile_catalog_repo
+var _building_repo
 var _game_loader
 var _equipment_system
 var _trade_system
 var _window_manager
+var _scene_manager
 var _settings_manager
 var _save_manager
 var _playtime_tracker
 var _llm_provider
+var _action_registry
+var _action_resolver
+var _action_executor
+var _action_prompt_builder
+var _world_scanner
 
 # Public Accessors
 var items:
@@ -36,12 +45,20 @@ var conversations:
 	get: return _conversation_repo
 var relationships:
 	get: return _relationships_repo
+var sprites:
+	get: return _sprite_repo
+var tile_catalog:
+	get: return _tile_catalog_repo
+var buildings:
+	get: return _building_repo
 var equipment:
 	get: return _equipment_system
 var trade:
 	get: return _trade_system
 var windows:
 	get: return _window_manager
+var scenes:
+	get: return _scene_manager
 var settings:
 	get: return _settings_manager
 var saves:
@@ -50,6 +67,16 @@ var playtime:
 	get: return _playtime_tracker
 var llm:
 	get: return _llm_provider
+var action_registry:
+	get: return _action_registry
+var action_resolver:
+	get: return _action_resolver
+var action_executor:
+	get: return _action_executor
+var action_prompts:
+	get: return _action_prompt_builder
+var world_scanner:
+	get: return _world_scanner
 
 func _ready():
 	# Bootstrap Settings (independent of game saves)
@@ -75,6 +102,9 @@ func _ready():
 	_npc_memories_repo = preload("res://src/core/repositories/npc_memories_repository.gd").new(_store)
 	_conversation_repo = preload("res://src/core/repositories/conversation_history_repository.gd").new(_store)
 	_relationships_repo = preload("res://src/core/repositories/relationships_repository.gd").new(_store)
+	_sprite_repo = preload("res://src/core/repositories/sprite_sheet_repository.gd").new()
+	_tile_catalog_repo = preload("res://src/core/repositories/tile_catalog_repository.gd").new()
+	_building_repo = preload("res://src/core/repositories/building_repository.gd").new()
 	
 	# Bootstrap Loaders
 	_game_loader = preload("res://src/core/loaders/game_loader.gd").new(
@@ -85,7 +115,17 @@ func _ready():
 	# Bootstrap Systems
 	_equipment_system = preload("res://src/systems/equipment_system.gd").new(_char_repo, _inv_repo, _item_repo)
 	_trade_system = preload("res://src/systems/trade_system.gd").new(_inv_repo)
-	_window_manager = preload("res://src/systems/window_manager.gd").new()
+	
+	# Bootstrap Managers
+	_window_manager = preload("res://src/core/managers/window_manager.gd").new()
+	_scene_manager = preload("res://src/core/managers/scene_manager.gd").new()
+	
+	# Bootstrap Action System
+	_action_registry = preload("res://src/systems/action_registry.gd").new()
+	_action_resolver = preload("res://src/systems/action_resolver.gd").new()
+	_action_executor = preload("res://src/systems/npc_action_executor.gd").new()
+	_action_prompt_builder = preload("res://src/systems/action_prompt_builder.gd").new()
+	_world_scanner = preload("res://src/components/world_scanner.gd").new()
 
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
@@ -156,3 +196,17 @@ func equip_item(player_id, instance_id, slot):
 
 func unequip_item(player_id, slot):
 	_equipment_system.unequip_item(player_id, slot)
+
+# Initialize action system with scene references
+func initialize_action_system(scene_root: Node, tilemap: TileMapLayer = null):
+	_world_scanner.initialize(scene_root, tilemap)
+	_action_prompt_builder.initialize(scene_root, tilemap)
+	print("DatabaseManager: Action system initialized")
+
+# Get the action context for an NPC's LLM prompt
+func get_npc_action_context(npc: Node2D) -> String:
+	return _action_prompt_builder.build_action_context(npc)
+
+# Execute actions from an LLM response on an NPC
+func execute_npc_actions(npc: Node2D, response_json: String) -> Dictionary:
+	return _action_executor.queue_actions_from_response(npc, response_json)

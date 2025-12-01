@@ -1,4 +1,4 @@
-extends Node
+extends RefCounted
 
 # Window Manager - tracks open windows, prevents duplicates, manages navigation stack
 
@@ -39,7 +39,7 @@ func register_window(window_type: String, context: String, window_node, opener_i
 		"opener_id": opener_id
 	})
 	
-	emit_signal("window_opened", id)
+	window_opened.emit(id)
 	print("WindowManager: Opened window: ", id)
 	return true
 
@@ -60,7 +60,7 @@ func close_window(window_type: String, context: String = ""):
 			navigation_stack.remove_at(i)
 			break
 	
-	emit_signal("window_closed", id)
+	window_closed.emit(id)
 	print("WindowManager: Closed window: ", id)
 	
 	return opener_id

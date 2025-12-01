@@ -1,0 +1,174 @@
+{
+	"sprite_sheets": [
+		{
+			"id": "male1",
+			"name": "Male Character 1",
+			"path": "res://src/assets/sprites/characters/MCharacter1.png",
+			"frame_width": 48,
+			"frame_height": 96,
+			"columns": 3,
+			"directions": {
+				"down": 0,
+				"left": 1,
+				"right": 2,
+				"up": 3
+			}
+		},
+		{
+			"id": "male2",
+			"name": "Male Character 2",
+			"path": "res://src/assets/sprites/characters/MCharacter2.png",
+			"frame_width": 48,
+			"frame_height": 96,
+			"columns": 3,
+			"directions": {
+				"down": 0,
+				"left": 1,
+				"right": 2,
+				"up": 3
+			}
+		},
+		{
+			"id": "male3",
+			"name": "Male Character 3",
+			"path": "res://src/assets/sprites/characters/MCharacter3.png",
+			"frame_width": 48,
+			"frame_height": 96,
+			"columns": 3,
+			"directions": {
+				"down": 0,
+				"left": 1,
+				"right": 2,
+				"up": 3
+			}
+		},
+		{
+			"id": "female1",
+			"name": "Female Character 1",
+			"path": "res://src/assets/sprites/characters/FCharacter1.png",
+			"frame_width": 48,
+			"frame_height": 96,
+			"columns": 3,
+			"directions": {
+				"down": 0,
+				"left": 1,
+				"right": 2,
+				"up": 3
+			}
+		},
+		{
+			"id": "female2",
+			"name": "Female Character 2",
+			"path": "res://src/assets/sprites/characters/FCharacter2.png",
+			"frame_width": 48,
+			"frame_height": 96,
+			"columns": 3,
+			"directions": {
+				"down": 0,
+				"left": 1,
+				"right": 2,
+				"up": 3
+			}
+		},
+		{
+			"id": "female3",
+			"name": "Female Character 3",
+			"path": "res://src/assets/sprites/characters/FCharacter3.png",
+			"frame_width": 48,
+			"frame_height": 96,
+			"columns": 3,
+			"directions": {
+				"down": 0,
+				"left": 1,
+				"right": 2,
+				"up": 3
+			}
+		},
+		{
+			"id": "homestead1",
+			"name": "Homestead Character 1",
+			"path": "res://src/assets/sprites/characters/$PFHomestead-Character1.png",
+			"frame_width": 48,
+			"frame_height": 96,
+			"columns": 3,
+			"directions": {
+				"down": 0,
+				"left": 1,
+				"right": 2,
+				"up": 3
+			}
+		},
+		{
+			"id": "homestead2",
+			"name": "Homestead Character 2",
+			"path": "res://src/assets/sprites/characters/$PFHomestead-Character2.png",
+			"frame_width": 48,
+			"frame_height": 96,
+			"columns": 3,
+			"directions": {
+				"down": 0,
+				"left": 1,
+				"right": 2,
+				"up": 3
+			}
+		},
+		{
+			"id": "homestead3",
+			"name": "Homestead Character 3",
+			"path": "res://src/assets/sprites/characters/$PFHomestead-Character3.png",
+			"frame_width": 48,
+			"frame_height": 96,
+			"columns": 3,
+			"directions": {
+				"down": 0,
+				"left": 1,
+				"right": 2,
+				"up": 3
+			}
+		},
+		{
+			"id": "homestead4",
+			"name": "Homestead Character 4",
+			"path": "res://src/assets/sprites/characters/$PFHomestead-Character4.png",
+			"frame_width": 48,
+			"frame_height": 96,
+			"columns": 3,
+			"directions": {
+				"down": 0,
+				"left": 1,
+				"right": 2,
+				"up": 3
+			}
+		},
+		{
+			"id": "homestead5",
+			"name": "Homestead Character 5",
+			"path": "res://src/assets/sprites/characters/$PFHomestead-Character5.png",
+			"frame_width": 48,
+			"frame_height": 96,
+			"columns": 3,
+			"directions": {
+				"down": 0,
+				"left": 1,
+				"right": 2,
+				"up": 3
+			}
+		},
+		{
+			"id": "homestead6",
+			"name": "Homestead Character 6",
+			"path": "res://src/assets/sprites/characters/$PFHomestead-Character6.png",
+			"frame_width": 48,
+			"frame_height": 96,
+			"columns": 3,
+			"directions": {
+				"down": 0,
+				"left": 1,
+				"right": 2,
+				"up": 3
+			}
+		}
+	],
+	"default_sprite": "homestead1"
+}
+

@@ -31,6 +31,10 @@ var _context_builder
 var _awaiting_greeting = false
 var _summarizing = false
 
+# Action mode - when enabled, NPC can take actions based on conversation
+var action_mode_enabled: bool = false
+var _current_npc_node: Node2D = null
+
 func _ready():
 	visible = false
 	_llm_client = preload("res://src/services/llm_client.gd").new()
@@ -38,15 +42,26 @@ func _ready():
 	http_request.request_completed.connect(_on_http_request_completed)
 	summary_http_request.request_completed.connect(_on_summary_request_completed)
 	
+	# Handle LLM client failures (e.g., no API key configured)
+	_llm_client.request_failed.connect(_on_llm_request_failed)
+	
 	# Tab switching
 	current_tab.pressed.connect(_show_current_chat)
 	history_tab.pressed.connect(_show_history)
+	
+	# Ensure input field can receive focus
+	if input_field:
+		input_field.focus_mode = Control.FOCUS_ALL
+		input_field.mouse_filter = Control.MOUSE_FILTER_STOP
+	else:
+		push_error("DialogueWindow: input_field is null!")
 
-func open(npc_id: String):
+func open(npc_id: String, npc_node: Node2D = null):
 	current_npc_id = npc_id
 	current_npc_data = DatabaseManager.characters.get_by_id(npc_id)
 	player_data = DatabaseManager.characters.get_player()
 	player_id = player_data.get("id", "player_1")
+	_current_npc_node = npc_node
 	
 	if not current_npc_data:
 		print("DialogueWindow: NPC not found: ", npc_id)
@@ -56,13 +71,19 @@ func open(npc_id: String):
 	current_session_messages.clear()
 	_clear_messages()
 	
-	# Build system prompt with full context
-	system_prompt = _context_builder.build_system_prompt(npc_id, player_id)
+	# Build system prompt - use action mode if NPC node is provided
+	if action_mode_enabled and _current_npc_node:
+		system_prompt = _context_builder.build_action_prompt(npc_id, player_id, _current_npc_node)
+		print("DialogueWindow: Action mode enabled for ", npc_id)
+	else:
+		system_prompt = _context_builder.build_system_prompt(npc_id, player_id)
 	
 	# Update UI
 	npc_name_label.text = "Talking to: " + current_npc_data.get("name", "Unknown")
 	status_label.text = ""
 	input_field.text = ""
+	input_field.editable = true  # Ensure input is enabled
+	send_button.disabled = false
 	
 	# Show current chat tab
 	_show_current_chat()
@@ -78,6 +99,8 @@ func open(npc_id: String):
 	if has_met:
 		_request_greeting()
 	else:
+		# First meeting - no greeting needed, just let player type
+		await get_tree().process_frame  # Wait a frame for UI to be ready
 		input_field.grab_focus()
 
 func _center_panel():
@@ -196,7 +219,16 @@ func _request_greeting():
 		{"role": "user", "content": "Generate a greeting."}
 	]
 	
+	print("DialogueWindow: Requesting greeting from LLM...")
 	_llm_client.send_message(messages, http_request)
+
+func _on_llm_request_failed(error: String):
+	print("DialogueWindow: LLM request failed - ", error)
+	_awaiting_greeting = false
+	input_field.editable = true
+	send_button.disabled = false
+	status_label.text = error
+	input_field.grab_focus()
 
 func _on_send_pressed():
 	var message = input_field.text.strip_edges()
@@ -262,9 +294,29 @@ func _on_http_request_completed(result: int, response_code: int, headers: Packed
 	if _awaiting_greeting:
 		_awaiting_greeting = false
 		# Add greeting to UI only (not to session messages, it's just a greeting)
-		_add_message(current_npc_data.get("name", "NPC"), response_text, false)
+		var greeting_text = _extract_dialogue_from_response(response_text)
+		_add_message(current_npc_data.get("name", "NPC"), greeting_text, false)
 		input_field.grab_focus()
 		return
+	
+	# Parse response - handle both plain text and action JSON
+	var dialogue_text = ""
+	var has_actions = false
+	
+	if action_mode_enabled and _current_npc_node:
+		var parsed = _parse_action_response(response_text)
+		dialogue_text = parsed.dialogue
+		has_actions = parsed.has_actions
+		
+		# Execute any actions
+		if has_actions:
+			var action_result = DatabaseManager.execute_npc_actions(_current_npc_node, response_text)
+			if action_result.success:
+				print("DialogueWindow: Executing ", action_result.action_count, " actions")
+			else:
+				print("DialogueWindow: Action execution failed - ", action_result.error)
+	else:
+		dialogue_text = response_text
 	
 	# Add NPC response to session
 	current_session_messages.append({
@@ -272,11 +324,12 @@ func _on_http_request_completed(result: int, response_code: int, headers: Packed
 		"content": response_text
 	})
 	
-	# Save to conversation history
-	DatabaseManager.conversations.add_message(current_npc_id, player_id, "assistant", response_text)
+	# Save to conversation history (save full response for context)
+	DatabaseManager.conversations.add_message(current_npc_id, player_id, "assistant", dialogue_text)
 	
-	# Add to UI
-	_add_message(current_npc_data.get("name", "NPC"), response_text, false)
+	# Add to UI (only show dialogue, not the full JSON)
+	if dialogue_text != "":
+		_add_message(current_npc_data.get("name", "NPC"), dialogue_text, false)
 	
 	input_field.grab_focus()
 
@@ -343,3 +396,51 @@ func _on_titlebar_gui_input(event):
 			dragging = event.pressed
 	elif event is InputEventMouseMotion and dragging:
 		panel.position += event.relative
+
+# Parse an action-mode response to extract dialogue and detect actions
+func _parse_action_response(response_text: String) -> Dictionary:
+	var result = {
+		"dialogue": response_text,
+		"has_actions": false
+	}
+	
+	# Try to parse as JSON
+	var json = JSON.new()
+	var parse_result = json.parse(response_text)
+	
+	if parse_result != OK:
+		# Not valid JSON - treat as plain text
+		return result
+	
+	var data = json.data
+	if not data is Dictionary:
+		return result
+	
+	# Extract dialogue
+	result.dialogue = data.get("dialogue", "")
+	
+	# Check for actions
+	var actions = data.get("actions", [])
+	if actions is Array and actions.size() > 0:
+		result.has_actions = true
+	
+	return result
+
+# Extract just the dialogue from a response (handles both JSON and plain text)
+func _extract_dialogue_from_response(response_text: String) -> String:
+	var json = JSON.new()
+	var parse_result = json.parse(response_text)
+	
+	if parse_result != OK:
+		return response_text
+	
+	var data = json.data
+	if data is Dictionary and data.has("dialogue"):
+		return data.get("dialogue", response_text)
+	
+	return response_text
+
+# Enable or disable action mode
+func set_action_mode(enabled: bool):
+	action_mode_enabled = enabled
+	print("DialogueWindow: Action mode ", "enabled" if enabled else "disabled")

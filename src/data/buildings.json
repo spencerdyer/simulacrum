@@ -1,0 +1,255 @@
+{
+	"_description": "Building definitions for the village. Each building has exterior appearance, interior layout, and entry points.",
+	
+	"building_types": {
+		"tavern": {
+			"name_template": "Tavern",
+			"default_description": "A cozy establishment serving food and drink to travelers and locals alike.",
+			"typical_features": ["bar_counter", "fireplace", "wooden_tables", "guest_rooms_upstairs"],
+			"default_size": {"width": 6, "height": 5}
+		},
+		"shop": {
+			"name_template": "Shop",
+			"default_description": "A merchant's establishment with goods on display.",
+			"typical_features": ["counter", "shelves", "storage_room"],
+			"default_size": {"width": 5, "height": 4}
+		},
+		"house": {
+			"name_template": "House",
+			"default_description": "A modest dwelling.",
+			"typical_features": ["bed", "fireplace", "table"],
+			"default_size": {"width": 4, "height": 4}
+		},
+		"church": {
+			"name_template": "Church",
+			"default_description": "A place of worship and contemplation.",
+			"typical_features": ["altar", "pews", "stained_glass"],
+			"default_size": {"width": 6, "height": 6}
+		}
+	},
+	
+	"buildings": {
+		"loc_tavern": {
+			"name": "The Rusty Tankard",
+			"type": "tavern",
+			"description": "The village's only tavern, a two-story wooden building with a creaky sign depicting a dented tankard. The interior is warm and smoky, with a large fireplace, several wooden tables, and a long bar.",
+			"exterior_position": {"x": -550, "y": 50},
+			"exterior_size": {"width": 4, "height": 3},
+			"entry_points": {
+				"main_door": {"x": -500, "y": 150, "facing": "down", "exterior_offset": {"x": 2, "y": 3}},
+				"default": {"x": -500, "y": 150, "facing": "down"}
+			},
+			"interior": {
+				"width": 10,
+				"height": 8,
+				"floor_tile": "wood_plank",
+				"wall_tile": "stone_wall",
+				"furniture": [
+					{"type": "bar_counter", "x": 1, "y": 1, "width": 5, "height": 1},
+					{"type": "fireplace", "x": 8, "y": 1, "width": 2, "height": 1},
+					{"type": "table", "x": 2, "y": 4, "width": 2, "height": 1},
+					{"type": "table", "x": 5, "y": 4, "width": 2, "height": 1},
+					{"type": "table", "x": 2, "y": 6, "width": 2, "height": 1}
+				],
+				"npc_positions": {
+					"npc_tavern_keeper": {"x": 3, "y": 2, "facing": "down"},
+					"npc_patron_farmer": {"x": 2, "y": 5, "facing": "right"},
+					"npc_patron_hunter": {"x": 6, "y": 5, "facing": "left"},
+					"npc_patron_bard": {"x": 4, "y": 7, "facing": "up"}
+				}
+			},
+			"environmental_state": {
+				"lighting": "warm_firelight",
+				"noise_level": "moderate_chatter",
+				"smell": "ale_and_woodsmoke",
+				"time_of_day_description": {
+					"morning": "The tavern is quiet, with only a few early risers nursing their breakfast.",
+					"afternoon": "A handful of patrons occupy the tables, enjoying a midday meal.",
+					"evening": "The tavern is lively with villagers gathered after a day's work.",
+					"night": "The fire burns low as the last patrons finish their drinks."
+				}
+			}
+		},
+		
+		"loc_church": {
+			"name": "Church of the Dawn",
+			"type": "church",
+			"description": "A modest stone chapel with a small bell tower. Stained glass windows depict scenes of sunrise and hope. The interior has wooden pews and a simple altar adorned with candles.",
+			"exterior_position": {"x": 500, "y": 0},
+			"exterior_size": {"width": 4, "height": 4},
+			"entry_points": {
+				"main_door": {"x": 500, "y": 100, "facing": "down"},
+				"default": {"x": 500, "y": 100, "facing": "down"}
+			},
+			"interior": {
+				"width": 8,
+				"height": 10,
+				"floor_tile": "stone_floor",
+				"wall_tile": "stone_wall",
+				"furniture": [
+					{"type": "altar", "x": 3, "y": 1, "width": 2, "height": 1},
+					{"type": "pew", "x": 1, "y": 4, "width": 2, "height": 1},
+					{"type": "pew", "x": 5, "y": 4, "width": 2, "height": 1},
+					{"type": "pew", "x": 1, "y": 6, "width": 2, "height": 1},
+					{"type": "pew", "x": 5, "y": 6, "width": 2, "height": 1}
+				],
+				"npc_positions": {
+					"npc_priest": {"x": 4, "y": 2, "facing": "down"}
+				}
+			},
+			"environmental_state": {
+				"lighting": "soft_candlelight",
+				"noise_level": "hushed_reverence",
+				"smell": "incense_and_candles"
+			}
+		},
+		
+		"loc_blacksmith": {
+			"name": "Iron & Steel",
+			"type": "shop",
+			"description": "The village blacksmith shop, identified by the constant ring of hammer on anvil and smoke rising from the forge. Weapons and armor hang on display racks.",
+			"exterior_position": {"x": -500, "y": -600},
+			"exterior_size": {"width": 4, "height": 3},
+			"entry_points": {
+				"main_door": {"x": -500, "y": -500, "facing": "down"},
+				"default": {"x": -500, "y": -500, "facing": "down"}
+			},
+			"interior": {
+				"width": 8,
+				"height": 6,
+				"floor_tile": "stone_floor",
+				"wall_tile": "stone_wall",
+				"furniture": [
+					{"type": "forge", "x": 1, "y": 1, "width": 2, "height": 2},
+					{"type": "anvil", "x": 4, "y": 2, "width": 1, "height": 1},
+					{"type": "weapon_rack", "x": 6, "y": 1, "width": 2, "height": 1},
+					{"type": "armor_stand", "x": 6, "y": 3, "width": 2, "height": 1}
+				],
+				"npc_positions": {
+					"npc_blacksmith": {"x": 4, "y": 3, "facing": "left"}
+				}
+			},
+			"environmental_state": {
+				"lighting": "forge_glow",
+				"noise_level": "hammer_clanging",
+				"smell": "hot_metal_and_coal",
+				"temperature": "very_warm"
+			}
+		},
+		
+		"loc_general_store": {
+			"name": "Odds & Ends",
+			"type": "shop",
+			"description": "A cluttered but organized general store selling everything from rope to rations. Shelves line every wall, packed with goods.",
+			"exterior_position": {"x": 500, "y": -600},
+			"exterior_size": {"width": 4, "height": 3},
+			"entry_points": {
+				"main_door": {"x": 500, "y": -500, "facing": "down"},
+				"default": {"x": 500, "y": -500, "facing": "down"}
+			},
+			"interior": {
+				"width": 7,
+				"height": 6,
+				"floor_tile": "wood_plank",
+				"wall_tile": "wood_wall",
+				"furniture": [
+					{"type": "counter", "x": 2, "y": 1, "width": 3, "height": 1},
+					{"type": "shelves", "x": 0, "y": 0, "width": 1, "height": 6},
+					{"type": "shelves", "x": 6, "y": 0, "width": 1, "height": 6},
+					{"type": "crate", "x": 1, "y": 4, "width": 1, "height": 1},
+					{"type": "barrel", "x": 5, "y": 4, "width": 1, "height": 1}
+				],
+				"npc_positions": {
+					"npc_merchant_1": {"x": 3, "y": 2, "facing": "down"}
+				}
+			},
+			"environmental_state": {
+				"lighting": "natural_daylight",
+				"noise_level": "quiet",
+				"smell": "dried_goods_and_leather"
+			}
+		},
+		
+		"loc_house_mayor": {
+			"name": "Mayor's House",
+			"type": "house",
+			"description": "The largest house in the village, belonging to Mayor Aldric. It has a well-maintained garden and a small study.",
+			"exterior_position": {"x": -500, "y": 600},
+			"exterior_size": {"width": 4, "height": 3},
+			"entry_points": {
+				"main_door": {"x": -500, "y": 700, "facing": "down"},
+				"default": {"x": -500, "y": 700, "facing": "down"}
+			},
+			"interior": {
+				"width": 8,
+				"height": 6,
+				"floor_tile": "wood_plank",
+				"wall_tile": "wood_wall",
+				"furniture": [
+					{"type": "bed", "x": 1, "y": 1, "width": 2, "height": 1},
+					{"type": "desk", "x": 5, "y": 1, "width": 2, "height": 1},
+					{"type": "fireplace", "x": 0, "y": 3, "width": 1, "height": 2},
+					{"type": "table", "x": 3, "y": 4, "width": 2, "height": 1},
+					{"type": "bookshelf", "x": 6, "y": 3, "width": 2, "height": 1}
+				],
+				"npc_positions": {
+					"npc_mayor": {"x": 6, "y": 2, "facing": "left"}
+				}
+			},
+			"environmental_state": {
+				"lighting": "comfortable",
+				"noise_level": "quiet",
+				"smell": "paper_and_ink"
+			}
+		},
+		
+		"loc_house_herbalist": {
+			"name": "Herbalist's Hut",
+			"type": "house",
+			"description": "A small hut on the edge of the village, surrounded by herb gardens. Strange smells often waft from within.",
+			"exterior_position": {"x": 500, "y": 600},
+			"exterior_size": {"width": 3, "height": 3},
+			"entry_points": {
+				"main_door": {"x": 500, "y": 700, "facing": "down"},
+				"default": {"x": 500, "y": 700, "facing": "down"}
+			},
+			"interior": {
+				"width": 6,
+				"height": 5,
+				"floor_tile": "wood_plank",
+				"wall_tile": "wood_wall",
+				"furniture": [
+					{"type": "cauldron", "x": 1, "y": 1, "width": 1, "height": 1},
+					{"type": "herb_drying_rack", "x": 3, "y": 0, "width": 3, "height": 1},
+					{"type": "bed", "x": 0, "y": 3, "width": 2, "height": 1},
+					{"type": "table", "x": 3, "y": 3, "width": 2, "height": 1},
+					{"type": "shelves", "x": 5, "y": 1, "width": 1, "height": 3}
+				],
+				"npc_positions": {
+					"npc_herbalist": {"x": 2, "y": 2, "facing": "right"}
+				}
+			},
+			"environmental_state": {
+				"lighting": "dim_mysterious",
+				"noise_level": "bubbling_cauldron",
+				"smell": "herbs_and_potions"
+			}
+		}
+	},
+	
+	"exterior_tile_templates": {
+		"_note": "These define how building exteriors are rendered on the world map using tileset tiles",
+		"simple_house": {
+			"roof_tile": {"source": "C", "x": 8, "y": 2},
+			"wall_tile": {"source": "C", "x": 8, "y": 4},
+			"door_tile": {"source": "B", "x": 4, "y": 10}
+		},
+		"tavern": {
+			"roof_tile": {"source": "C", "x": 12, "y": 2},
+			"wall_tile": {"source": "C", "x": 12, "y": 4},
+			"door_tile": {"source": "B", "x": 4, "y": 10},
+			"sign_tile": {"source": "B", "x": 6, "y": 4}
+		}
+	}
+}
+

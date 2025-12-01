@@ -1,2 +1,2 @@
-res://src/entities/building/tavern.tscn
-res://src/entities/player/player.gd
+res://src/core/database_manager.gd
+res://src/tools/village_generator.gd

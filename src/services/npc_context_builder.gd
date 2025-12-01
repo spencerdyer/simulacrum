@@ -154,3 +154,57 @@ func _get_speculation_rules() -> String:
 		return _templates.get_template("npc", "speculation_strict")
 	else:
 		return _templates.get_template("npc", "speculation_speculative")
+
+# Build an action-enabled system prompt for NPCs that can take actions
+func build_action_prompt(npc_id: String, player_id: String, npc_node: Node2D = null) -> String:
+	# Get the base conversation prompt
+	var base_prompt = build_system_prompt(npc_id, player_id)
+	
+	# Add action context if NPC node is provided
+	var action_context = ""
+	if npc_node:
+		action_context = DatabaseManager.get_npc_action_context(npc_node)
+	else:
+		# Fallback: just add the action format instructions without world context
+		action_context = _get_action_format_instructions()
+	
+	return base_prompt + "\n\n" + action_context
+
+func _get_action_format_instructions() -> String:
+	return """## Response Format for Actions
+
+When the player asks you to do something (like move, come here, go there), you can respond with actions.
+You MUST respond with valid JSON in this format:
+
+```json
+{
+  "thought": "Your internal reasoning (player won't see this)",
+  "dialogue": "What you say out loud",
+  "actions": [
+    {
+      "sequence": 1,
+      "action": "move",
+      "params": {
+        "target_x": 150,
+        "target_y": 200
+      }
+    }
+  ]
+}
+```
+
+Available actions:
+- move: Walk to a position. Params: target_x (float), target_y (float)
+- wait: Pause before next action. Params: duration (float, 0.5 to 5.0 seconds)
+- face: Turn to face a direction. Params: target_x (float), target_y (float)
+
+If you're just talking (no physical action needed), respond with an empty actions array:
+```json
+{
+  "thought": "Just a conversation",
+  "dialogue": "Hello there!",
+  "actions": []
+}
+```
+
+IMPORTANT: Your response must be valid JSON only. No other text before or after."""

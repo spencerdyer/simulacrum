@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csyktapwbfsu5"
-path="res://.godot/imported/!PixelFantasy_Door1.png-d3a30fa14742008e850fbade7138e902.ctex"
+uid="uid://bhfl6jnus2yc4"
+path="res://.godot/imported/!PixelFantasy_Door1.png-07f481a0dc33f7cb72a6827f4e6956e0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/assets/sprites/characters/!PixelFantasy_Door1.png"
-dest_files=["res://.godot/imported/!PixelFantasy_Door1.png-d3a30fa14742008e850fbade7138e902.ctex"]
+source_file="res://src/assets/sprites/tilesets/!PixelFantasy_Door1.png"
+dest_files=["res://.godot/imported/!PixelFantasy_Door1.png-07f481a0dc33f7cb72a6827f4e6956e0.ctex"]
 
 [params]
 

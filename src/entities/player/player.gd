@@ -7,13 +7,14 @@ var target_position = Vector2.ZERO
 
 # Facing direction (normalized vector)
 var facing_direction = Vector2.DOWN  # Default facing down
+var is_moving = false
 
 # Interaction
 var interact_range = 120.0
 var facing_cone_angle = 90.0  # Degrees - how wide the "facing" cone is
 
-@onready var facing_indicator = $FacingIndicator
 @onready var camera = $Camera2D
+@onready var character_renderer = $CharacterRenderer
 
 # Zoom settings
 var zoom_level = 0.75  # Current zoom (matches Camera2D default)
@@ -24,7 +25,13 @@ var zoom_speed = 0.1   # How much to zoom per scroll
 func _ready():
 	# Initialize target to current position so we don't drift at start
 	target_position = position
-	_update_facing_indicator()
+	_load_player_sprite()
+
+func _load_player_sprite():
+	# Load sprite from player character data
+	var player_data = DatabaseManager.characters.get_player()
+	if player_data and character_renderer:
+		character_renderer.load_from_character_data(player_data)
 
 func _unhandled_input(event):
 	# Mouse Movement
@@ -159,26 +166,25 @@ func _get_interaction_score(target_pos: Vector2) -> float:
 
 func _physics_process(_delta):
 	var current_pos = global_position
+	var was_moving = is_moving
 	
 	# Check if we are close enough to the target to stop
 	if current_pos.distance_to(target_position) > 5.0:
 		var direction = (target_position - current_pos).normalized()
 		velocity = direction * speed
+		is_moving = true
 		
 		# Update facing direction based on movement
 		facing_direction = direction
-		_update_facing_indicator()
 		
 		move_and_slide()
 	else:
 		velocity = Vector2.ZERO
-
-func _update_facing_indicator():
-	if facing_indicator:
-		# Rotate the indicator node to point in facing direction
-		# facing_direction.angle() returns angle from positive X axis (right/east)
-		# We add PI/2 to convert so that "up" (negative Y) is the default
-		facing_indicator.rotation = facing_direction.angle() + PI/2
+		is_moving = false
+	
+	# Update character animation
+	if character_renderer:
+		character_renderer.update_animation(is_moving, facing_direction)
 
 func get_facing_direction() -> Vector2:
 	return facing_direction

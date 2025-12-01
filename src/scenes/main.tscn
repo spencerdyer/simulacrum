@@ -1,235 +1,32 @@
-[gd_scene load_steps=16 format=3 uid="uid://b4k8d2y5r7x3"]
+[gd_scene load_steps=14 format=3 uid="uid://b4k8d2y5r7x3"]
 
-[ext_resource type="Script" path="res://src/scenes/main.gd" id="1_script"]
-[ext_resource type="PackedScene" uid="uid://c8k8d2y5r7x9" path="res://src/entities/player/player.tscn" id="2_player"]
-[ext_resource type="PackedScene" uid="uid://npc_scene_12345" path="res://src/entities/npc/npc.tscn" id="2_npc"]
+[ext_resource type="Script" uid="uid://cc88nxak52oyn" path="res://src/scenes/main.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://src/entities/npc/npc.tscn" id="2_npc"]
+[ext_resource type="PackedScene" uid="uid://c8k8d2y5r7ya" path="res://src/entities/player/player.tscn" id="2_player"]
 [ext_resource type="PackedScene" uid="uid://e4k8d2y5r7x2" path="res://src/ui/hud.tscn" id="3_hud"]
 [ext_resource type="PackedScene" uid="uid://d3k8d2y5r7x1" path="res://src/ui/character_screen.tscn" id="4_charscreen"]
 [ext_resource type="PackedScene" uid="uid://f5k8d2y5r7x4" path="res://src/ui/inventory_screen.tscn" id="5_invscreen"]
-[ext_resource type="PackedScene" uid="uid://trade_screen_456" path="res://src/ui/trade_screen.tscn" id="6_tradescreen"]
-[ext_resource type="PackedScene" uid="uid://interaction_menu_123" path="res://src/ui/interaction_menu.tscn" id="7_interactmenu"]
-[ext_resource type="PackedScene" uid="uid://dialogue_window_001" path="res://src/ui/dialogue_window.tscn" id="8_dialogue"]
-[ext_resource type="PackedScene" uid="uid://system_menu_001" path="res://src/ui/system_menu/system_menu.tscn" id="9_sysmenu"]
-[ext_resource type="PackedScene" uid="uid://save_menu_001" path="res://src/ui/system_menu/save_menu.tscn" id="10_savemenu"]
-[ext_resource type="PackedScene" uid="uid://load_menu_001" path="res://src/ui/system_menu/load_menu.tscn" id="11_loadmenu"]
-[ext_resource type="PackedScene" uid="uid://settings_menu_001" path="res://src/ui/system_menu/settings_menu.tscn" id="12_settingsmenu"]
-[ext_resource type="PackedScene" uid="uid://building_base_001" path="res://src/entities/building/building.tscn" id="13_building"]
-[ext_resource type="PackedScene" uid="uid://tavern_building_001" path="res://src/entities/building/tavern.tscn" id="14_tavern"]
+[ext_resource type="PackedScene" path="res://src/ui/trade_screen.tscn" id="6_tradescreen"]
+[ext_resource type="PackedScene" path="res://src/ui/interaction_menu.tscn" id="7_interactmenu"]
+[ext_resource type="PackedScene" path="res://src/ui/dialogue_window.tscn" id="8_dialogue"]
+[ext_resource type="PackedScene" path="res://src/ui/system_menu/system_menu.tscn" id="9_sysmenu"]
+[ext_resource type="PackedScene" path="res://src/ui/system_menu/save_menu.tscn" id="10_savemenu"]
+[ext_resource type="PackedScene" path="res://src/ui/system_menu/load_menu.tscn" id="11_loadmenu"]
+[ext_resource type="PackedScene" path="res://src/ui/system_menu/settings_menu.tscn" id="12_settingsmenu"]
+[ext_resource type="TileSet" path="res://src/assets/sprites/tilesets/village_tileset.tres" id="15_tileset"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_script")
 
-[node name="Ground" type="Node2D" parent="."]
-
-[node name="Grass" type="ColorRect" parent="Ground"]
-offset_left = -2000.0
-offset_top = -2000.0
-offset_right = 4000.0
-offset_bottom = 4000.0
-mouse_filter = 2
-color = Color(0.25, 0.45, 0.2, 1)
-
-[node name="MainPath" type="ColorRect" parent="Ground"]
-offset_left = -100.0
-offset_top = -1500.0
-offset_right = 100.0
-offset_bottom = 1500.0
-mouse_filter = 2
-color = Color(0.55, 0.45, 0.35, 1)
-
-[node name="TavernPath" type="ColorRect" parent="Ground"]
-offset_left = -800.0
-offset_top = -100.0
-offset_right = -100.0
-offset_bottom = 200.0
-mouse_filter = 2
-color = Color(0.55, 0.45, 0.35, 1)
-
-[node name="ChurchPath" type="ColorRect" parent="Ground"]
-offset_left = 100.0
-offset_top = -100.0
-offset_right = 600.0
-offset_bottom = 100.0
-mouse_filter = 2
-color = Color(0.55, 0.45, 0.35, 1)
-
-[node name="BlacksmithPath" type="ColorRect" parent="Ground"]
-offset_left = -600.0
-offset_top = -700.0
-offset_right = -100.0
-offset_bottom = -500.0
-mouse_filter = 2
-color = Color(0.55, 0.45, 0.35, 1)
-
-[node name="GeneralStorePath" type="ColorRect" parent="Ground"]
-offset_left = 100.0
-offset_top = -700.0
-offset_right = 600.0
-offset_bottom = -500.0
-mouse_filter = 2
-color = Color(0.55, 0.45, 0.35, 1)
-
-[node name="HousePath1" type="ColorRect" parent="Ground"]
-offset_left = -600.0
-offset_top = 500.0
-offset_right = -100.0
-offset_bottom = 700.0
-mouse_filter = 2
-color = Color(0.55, 0.45, 0.35, 1)
-
-[node name="HousePath2" type="ColorRect" parent="Ground"]
-offset_left = 100.0
-offset_top = 500.0
-offset_right = 600.0
-offset_bottom = 700.0
-mouse_filter = 2
-color = Color(0.55, 0.45, 0.35, 1)
-
-[node name="TownSquare" type="ColorRect" parent="Ground"]
-offset_left = -200.0
-offset_top = -200.0
-offset_right = 200.0
-offset_bottom = 200.0
-mouse_filter = 2
-color = Color(0.5, 0.42, 0.32, 1)
-
-[node name="Well" type="ColorRect" parent="Ground"]
-offset_left = -40.0
-offset_top = -40.0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 2
-color = Color(0.3, 0.3, 0.35, 1)
-
-[node name="Buildings" type="Node2D" parent="."]
-
-[node name="Tavern" parent="Buildings" instance=ExtResource("14_tavern")]
-position = Vector2(-550, 50)
-
-[node name="Church" parent="Buildings" instance=ExtResource("13_building")]
-position = Vector2(500, 0)
-building_name = "Church of the Dawn"
-building_type = "church"
-building_color = Color(0.7, 0.7, 0.75, 1)
-
-[node name="Blacksmith" parent="Buildings" instance=ExtResource("13_building")]
-position = Vector2(-500, -600)
-building_name = "Iron & Steel"
-building_type = "shop"
-building_color = Color(0.35, 0.3, 0.3, 1)
-
-[node name="GeneralStore" parent="Buildings" instance=ExtResource("13_building")]
-position = Vector2(500, -600)
-building_name = "Odds & Ends"
-building_type = "shop"
-building_color = Color(0.45, 0.4, 0.3, 1)
-
-[node name="MayorHouse" parent="Buildings" instance=ExtResource("13_building")]
-position = Vector2(-500, 600)
-building_name = "Mayor's House"
-building_type = "house"
-building_color = Color(0.4, 0.35, 0.3, 1)
-
-[node name="HerbalistHut" parent="Buildings" instance=ExtResource("13_building")]
-position = Vector2(500, 600)
-building_name = "Herbalist's Hut"
-building_type = "house"
-building_color = Color(0.35, 0.4, 0.3, 1)
-
-[node name="Decorations" type="Node2D" parent="."]
-
-[node name="Tree1" type="ColorRect" parent="Decorations"]
-offset_left = -950.0
-offset_top = -300.0
-offset_right = -910.0
-offset_bottom = -260.0
-mouse_filter = 2
-color = Color(0.15, 0.35, 0.15, 1)
-
-[node name="Tree2" type="ColorRect" parent="Decorations"]
-offset_left = 760.0
-offset_top = -400.0
-offset_right = 800.0
-offset_bottom = -360.0
-mouse_filter = 2
-color = Color(0.15, 0.35, 0.15, 1)
-
-[node name="Tree3" type="ColorRect" parent="Decorations"]
-offset_left = -950.0
-offset_top = 350.0
-offset_right = -910.0
-offset_bottom = 390.0
-mouse_filter = 2
-color = Color(0.15, 0.35, 0.15, 1)
-
-[node name="Tree4" type="ColorRect" parent="Decorations"]
-offset_left = 760.0
-offset_top = 400.0
-offset_right = 800.0
-offset_bottom = 440.0
-mouse_filter = 2
-color = Color(0.15, 0.35, 0.15, 1)
-
-[node name="VillageSign" type="Label" parent="Decorations"]
-offset_left = -200.0
-offset_top = -900.0
-offset_right = 200.0
-offset_bottom = -850.0
-theme_override_font_sizes/font_size = 36
-text = "Welcome to Willowbrook"
-horizontal_alignment = 1
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+z_index = -1
+tile_set = ExtResource("15_tileset")
 
 [node name="NPCs" type="Node2D" parent="."]
 
-[node name="TavernKeeper" parent="NPCs" instance=ExtResource("2_npc")]
-position = Vector2(-620, -80)
-npc_id = "npc_tavern_keeper"
-npc_color = Color(0.6, 0.4, 0.3, 1)
-
-[node name="OldHenrick" parent="NPCs" instance=ExtResource("2_npc")]
-position = Vector2(-700, 50)
-npc_id = "npc_patron_farmer"
-npc_color = Color(0.5, 0.5, 0.4, 1)
-
-[node name="SeraNightbow" parent="NPCs" instance=ExtResource("2_npc")]
-position = Vector2(-400, 50)
-npc_id = "npc_patron_hunter"
-npc_color = Color(0.3, 0.4, 0.3, 1)
-
-[node name="PipMerryweather" parent="NPCs" instance=ExtResource("2_npc")]
-position = Vector2(-550, 80)
-npc_id = "npc_patron_bard"
-npc_color = Color(0.7, 0.5, 0.3, 1)
-
-[node name="FatherAldous" parent="NPCs" instance=ExtResource("2_npc")]
-position = Vector2(500, 0)
-npc_id = "npc_priest"
-npc_color = Color(0.6, 0.6, 0.65, 1)
-
-[node name="GretaIronhand" parent="NPCs" instance=ExtResource("2_npc")]
-position = Vector2(-500, -600)
-npc_id = "npc_blacksmith"
-npc_color = Color(0.5, 0.35, 0.3, 1)
-
-[node name="MiloCopperworth" parent="NPCs" instance=ExtResource("2_npc")]
-position = Vector2(500, -600)
-npc_id = "npc_merchant_1"
-npc_color = Color(0.55, 0.45, 0.35, 1)
-
-[node name="MayorAldric" parent="NPCs" instance=ExtResource("2_npc")]
-position = Vector2(-500, 600)
-npc_id = "npc_mayor"
-npc_color = Color(0.4, 0.35, 0.5, 1)
-
 [node name="TomOakheart" parent="NPCs" instance=ExtResource("2_npc")]
-position = Vector2(0, -350)
+position = Vector2(24, -336)
 npc_id = "npc_guard"
-npc_color = Color(0.4, 0.45, 0.5, 1)
-
-[node name="EsmeWillowmere" parent="NPCs" instance=ExtResource("2_npc")]
-position = Vector2(500, 600)
-npc_id = "npc_herbalist"
-npc_color = Color(0.4, 0.5, 0.4, 1)
 
 [node name="Player" parent="." instance=ExtResource("2_player")]
 position = Vector2(0, 300)
