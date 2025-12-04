@@ -45,6 +45,9 @@ func build_system_prompt(npc_id: String, player_id: String) -> String:
 		"player_name": player_data.get("name", "Adventurer"),
 		"player_description": player_data.get("description", "A traveler."),
 		
+		# Time context
+		"current_time": _build_time_context(),
+		
 		# Dynamic content
 		"npc_inventory": _build_inventory_text(npc_id, npc_data.get("can_trade", false)),
 		"world_knowledge": _build_world_knowledge_text(npc_id),
@@ -154,6 +157,16 @@ func _get_speculation_rules() -> String:
 		return _templates.get_template("npc", "speculation_strict")
 	else:
 		return _templates.get_template("npc", "speculation_speculative")
+
+func _build_time_context() -> String:
+	if not DatabaseManager.game_clock:
+		return "It is daytime."
+	
+	var clock = DatabaseManager.game_clock
+	var time_str = clock.get_formatted_time()
+	var time_desc = clock.get_time_description()
+	
+	return "The current time is %s (%s)." % [time_str, time_desc]
 
 # Build an action-enabled system prompt for NPCs that can take actions
 func build_action_prompt(npc_id: String, player_id: String, npc_node: Node2D = null) -> String:

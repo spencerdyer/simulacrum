@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b4k8d2y5r7x3"]
+[gd_scene load_steps=15 format=3 uid="uid://b4k8d2y5r7x3"]
 
 [ext_resource type="Script" uid="uid://cc88nxak52oyn" path="res://src/scenes/main.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://src/entities/npc/npc.tscn" id="2_npc"]
@@ -14,9 +14,13 @@
 [ext_resource type="PackedScene" path="res://src/ui/system_menu/load_menu.tscn" id="11_loadmenu"]
 [ext_resource type="PackedScene" path="res://src/ui/system_menu/settings_menu.tscn" id="12_settingsmenu"]
 [ext_resource type="TileSet" path="res://src/assets/sprites/tilesets/village_tileset.tres" id="15_tileset"]
+[ext_resource type="Script" path="res://src/components/day_night_cycle.gd" id="16_daynight"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_script")
+
+[node name="DayNightCycle" type="CanvasModulate" parent="."]
+script = ExtResource("16_daynight")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -1

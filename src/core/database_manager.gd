@@ -27,6 +27,7 @@ var _action_resolver
 var _action_executor
 var _action_prompt_builder
 var _world_scanner
+var _game_clock
 
 # Public Accessors
 var items:
@@ -77,6 +78,8 @@ var action_prompts:
 	get: return _action_prompt_builder
 var world_scanner:
 	get: return _world_scanner
+var game_clock:
+	get: return _game_clock
 
 func _ready():
 	# Bootstrap Settings (independent of game saves)
@@ -126,6 +129,10 @@ func _ready():
 	_action_executor = preload("res://src/systems/npc_action_executor.gd").new()
 	_action_prompt_builder = preload("res://src/systems/action_prompt_builder.gd").new()
 	_world_scanner = preload("res://src/components/world_scanner.gd").new()
+	
+	# Bootstrap Game Clock (needs to be added to tree for _process)
+	_game_clock = preload("res://src/core/managers/game_clock.gd").new()
+	add_child(_game_clock)
 
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:

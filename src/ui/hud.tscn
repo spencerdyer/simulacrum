@@ -12,6 +12,25 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_script")
 
+[node name="TimeDisplay" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -140.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 50.0
+grow_horizontal = 0
+
+[node name="TimeLabel" type="Label" parent="TimeDisplay"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.8, 1)
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "8:00am"
+
 [node name="CharButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 3

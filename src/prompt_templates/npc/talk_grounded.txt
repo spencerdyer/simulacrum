@@ -40,6 +40,9 @@ Stats:
 === CONVERSATION HISTORY ===
 {{conversation_summary}}
 
+=== CURRENT TIME ===
+{{current_time}}
+
 === WHO YOU ARE TALKING TO ===
 You are speaking with {{player_name}}.
 {{player_description}}
